@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class ="card text-center">
+	<div class ="card-body">
+		<h1>Welcome To CrowdBase</h1>
+		
+<p>Welcome to CrowdBase. Help contribute to the WISDOM OF THE CROWD. </p>
+		<div>
+		<a class ="btn btn-dark" href ="{% url 'polls:index' %}">
+			View Available Polls</a>
+		</div>
+		<div>
+			<a class ="btn btn-dark" href ="{% url 'signup:signup' %}">
+				Sign Up</a>
+		</div>
+		<div>
+			<a class ="btn btn-dark" href ="/login">
+				Log In</a>
+		</div>
+	</div>
+</div>
+{% endblock %}
