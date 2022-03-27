@@ -1,0 +1,5 @@
+django
+js.jquery
+js.bootstrap
+js.underscore
+# ...

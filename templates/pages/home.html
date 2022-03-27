@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{%block head_title %} Crowd Predictive Analytics {%endblock head_title %}
+{%block content %}
+
+<div class='row text-center'>
+    <div class="col">
+        <h1>Welcome to Crowd Predictive Analytics</h1>
+    </div>
+</div>
+
+<div class='row' id="questions">
+    Replace Me
+</div>
+
+
+<script>
+const questionElement = document.getElementById('questions')
+questionElement.innerHTML = 'Loading.....'
+
+const xhr = new XMLHttpRequest()
+const method = 'GET'
+const url = '/questions/'
+const responseType='json'
+xhr.responseType = responseType
+xhr.open(method, url)
+
+function submitNoVote(question_id, currentCount) {
+    console.log(question_id, currentCount)
+
+}
+
+function submitYesVote(question_id, currentCount) {
+
+
+}
+
+function voteYes(question) {
+    return "<button class='btn btn-primary'onclick=submitYesVote(question.id, questions.yesVotes)> Yes </button>"
+}
+function voteNo(question){
+    return "<button class='btn btn-primary' onclick=submitNoVote("+question.id+", "+question.noVotes+")> No </button>"
+}
+
+function formatQuestionElement(q) {
+    var formattedQuestion = "<div class='col-12 col-md-10  border-top border-bottom py-3 mb-4 question' id='question-" + q.id + "'><p>" + q.question + "<\p><div class='btn-group'>"+
+    voteYes(q)+voteNo(q)+
+    "<\div>"
+    return formattedQuestion
+}
+xhr.onload = function() {
+    const serverResponse = xhr.response
+    var listedItems=serverResponse.response
+    var finalQuestionStr = ''
+    for (var i=0; i< listedItems.length; i++){
+        console.log(i)
+        console.log(listedItems[i])
+        var questionObj = listedItems[i]
+        var currentItem = formatQuestionElement(questionObj)
+        finalQuestionStr += currentItem
+    }
+    questionElement.innerHTML  = finalQuestionStr
+    console.log(listedItems)
+}
+xhr.send()
+
+</script>
+
+
+{%endblock content %}
