@@ -1,6 +1,6 @@
-{% extends 'base.html' %}
+<!-- {% extends 'base.html' %}
 {%block head_title %} Crowd Predictive Analytics {%endblock head_title %}
-{%block content %}
+{%block content %} -->
 
 <div class='row text-center'>
     <div class="col">
@@ -8,46 +8,55 @@
     </div>
 </div>
 
-<div class='row' id="questions">
-    Replace Me
+
+
+<div class='row' id='questions'>
+
+</div>
+
+<div class = 'col-md-4 mx-auto col-10'>
+    <form class ='form' id='question-create-form' method='POST' action='/submit-vote'>
+        {% csrf_token %}
+        <input type='hidden' value='/' name='next' />
+        <button type='submit' class = 'btn btn-primary'> Submit</button> 
+    </form> 
 </div>
 
 
+
 <script>
-const questionElement = document.getElementById('questions')
-questionElement.innerHTML = 'Loading.....'
 
-const xhr = new XMLHttpRequest()
-const method = 'GET'
-const url = '/questions/'
-const responseType='json'
-xhr.responseType = responseType
-xhr.open(method, url)
-
-function submitNoVote(question_id, currentCount) {
-    console.log(question_id, currentCount)
+function handleFormSubmit(event){
+    event.preventDefault()
+    const myForm = event.target
+    const myFormData = new FormData(myForm)
+    const endpoint = myForm.getAttribute("action")
+    const method = myForm.getAttribute("method")
+    const xhr = new XMLHttpRequest()
+    xhr.open(method,url)
+    xhr.setRequestHeader("HTTP_X_REQUESTED_WITH", "XMLHttpRequest")
+    xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest")
+    xhr.onload=function(){
+        const serverResponse = xhr.response
+        console.log(serverResponse)
+    }
+    xhr.send(myFormData)
 
 }
+const questionEl = document.getElementById('questions')
 
-function submitYesVote(question_id, currentCount) {
+const questionCrEl  = document.getElementById('question-create-form')
 
+questionCrEl.addEventListener("submit",handleFormSubmit )
 
-}
-
-function voteYes(question) {
-    return "<button class='btn btn-primary'onclick=submitYesVote(question.id, questions.yesVotes)> Yes </button>"
-}
-function voteNo(question){
-    return "<button class='btn btn-primary' onclick=submitNoVote("+question.id+", "+question.noVotes+")> No </button>"
-}
-
-function formatQuestionElement(q) {
-    var formattedQuestion = "<div class='col-12 col-md-10  border-top border-bottom py-3 mb-4 question' id='question-" + q.id + "'><p>" + q.question + "<\p><div class='btn-group'>"+
-    voteYes(q)+voteNo(q)+
-    "<\div>"
-    return formattedQuestion
-}
-xhr.onload = function() {
+function loadQuestions(questionElement) {
+    const xhr = new XMLHttpRequest()
+    const method = 'GET'
+    const url = '/questions/'
+    const responseType='json'
+    xhr.responseType = responseType
+    xhr.open(method, url)
+    xhr.onload = function() {
     const serverResponse = xhr.response
     var listedItems=serverResponse.response
     var finalQuestionStr = ''
@@ -62,6 +71,43 @@ xhr.onload = function() {
     console.log(listedItems)
 }
 xhr.send()
+
+}
+
+loadQuestions(questionEl)
+
+// questionElement.innerHTML = 'Loading.....'
+
+
+
+function submitNoVote(question_id, currentCount) {
+    console.log(question_id, currentCount)
+
+}
+
+function submitYesVote(question_id, currentCount) {
+
+
+}
+
+function voteYes(question) {
+    return "<button class='btn btn-primary'onclick=submitYesVote("+question.id+", "+question.yesVotes+")> Yes </button>"
+}
+function voteNo(question){
+    return "<button class='btn btn-primary' onclick=submitNoVote("+question.id+", "+question.noVotes+")> No </button>"
+}
+
+function submit() {
+    return "<div class = 'col-md-4 mx-auto col-10'><form class ='form' method='POST' action='/submit-vote'> <input type='hidden' value='/' name='next' /> <button type='submit' class = 'btn btn-primary'> Submit</button> </form> </div>"
+}
+
+function formatQuestionElement(q) {
+    var formattedQuestion = "<div class='col-12 col-md-10  border-top border-bottom py-3 mb-4 question' id='question-" + q.id + "'><p>" + q.question + "<\p><div class='btn-group'>"+
+    voteYes(q)+ "   " +voteNo(q)+
+    "</div>"
+    return formattedQuestion
+}
+
 
 </script>
 

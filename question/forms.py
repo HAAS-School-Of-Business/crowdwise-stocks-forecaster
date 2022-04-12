@@ -2,9 +2,9 @@ from urllib import response
 from django import forms
 
 
-from .models import Question, Choice
+from .models import Choice
 
-class QuestionForm(forms.ModelForm):
+class ChoiceForm(forms.ModelForm):
     class Meta:
         model = Choice
         fields = ['response']
