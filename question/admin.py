@@ -4,7 +4,7 @@ from django.contrib import admin
 
 
 from django.contrib import admin
-from .models import Question, Category, Choice, Results
+from .models import Question, Category, Choice
 
 
 @admin.register(Question)
@@ -16,7 +16,6 @@ class AuthorAdmin(admin.ModelAdmin):
 # admin.site.register(User)
 admin.site.register(Category)
 admin.site.register(Choice)
-admin.site.register(Results)
 
 
 

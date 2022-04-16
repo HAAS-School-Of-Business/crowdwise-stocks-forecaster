@@ -1,5 +1,5 @@
 from django.db import models
-
+from question.models import Question, Choice
 # Create your models here.
 from django.db import models
 from django.db.models.signals import post_save
@@ -17,10 +17,24 @@ def user_directory_path(instance, filename):
 
 
 class Profile(models.Model):
+    def get_queryset(self):
+        return super().get_queryset().filter(self.choices)
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     avatar = models.ImageField(
-        upload_to=user_directory_path, default='users/avatar.jpg')
+    upload_to=user_directory_path, default=None)
     bio = models.TextField(max_length=500, blank=True)
+    questions_answered = models.ManyToManyField(Question, null=True)
+    choices = models.ManyToManyField(Choice, null=True)
+    questions_answered_count = models.IntegerField(default=0, blank=True)
+    correct_answers = models.IntegerField(default=0, blank=True)
+
+    @property
+    def accuracy(self):        
+        "Returns the Accuracy percentage of the user"
+        return (self.correct_answers / self.questions_answered) *100
+
+
     def clean(self):
         if not self.avatar:
             raise ValidationError("x")

@@ -1,17 +1,18 @@
+from statistics import quantiles
+from tkinter.ttk import Button
 from urllib import response
 from django import forms
+from requests import request
 
 
-from .models import Choice
+from .models import Question, Choice
 
 class ChoiceForm(forms.ModelForm):
     class Meta:
         model = Choice
-        fields = ['response']
+        fields = ['user','response', 'question', 'answered']
 
 
-    def clean_response(self):
-        resp = self.cleaned_data.get('response')
-        if resp == None:
-            raise forms.ValidationError("Please Submit Vote")
-        return resp
+
+
+

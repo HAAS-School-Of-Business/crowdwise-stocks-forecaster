@@ -23,14 +23,10 @@ APPEND_SLASH=False
 SECRET_KEY = 'django-insecure-mnfoq3kvdq!)0^9bw8(7nhb+km1zzf8)*@@8#m4449faihrw$9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1']
 
-import js
-STATICFILES_DIRS = (
-    ('js', js.__path__[0]),
-)
 
 
 # Application definition
@@ -128,8 +124,9 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = '/static/'
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
 LOGIN_REDIRECT_URL = 'accounts:profile'
 LOGIN_URL = 'login'

@@ -1,6 +1,56 @@
 {% extends 'base.html' %}
-<!-- {%block head_title %} Crowd Predictive Analytics {%endblock head_title %} -->
-{%block content %} 
+
+
+{% block content %}
+
+  <center>
+    {% if voted %}
+       <h1> Your Vote was submitted ! </h1>
+    {% elif user not in question.voters.all %}
+    <form action="" method=POST>
+        {% csrf_token%}
+        <h1>{{question.question}}</h1>
+        <input type='submit' value='Yes' name='Yes' />
+        <input type='submit' value='No' name='No' />
+    </form>
+    {% else %}
+    <form action="" method=GET>
+      <div class="card mb-4 box-shadow">
+        <div class="card-body">
+            <h2 style="font-size:18px;font-weight:bold">{{question.question}}</h2>
+            <p class="card-text">Yes Votes = {{question.yesVotes}}</p>
+            <p class="card-text">No Votes = {{question.noVotes}}</p>
+            {% if response%}
+            <p class="card-text">Your Vote = Yes </p>
+            {%elif not response == None %}
+            <p class="card-text">Your Vote = No</p>
+            {%endif%}
+            <!-- <p class="card-text">Your Vote = YES</p>
+            <p -->
+            {% if not question.dateEnds.is_past_due %}
+            <div class="d-flex justify-content-between align-items-center">
+              <small class="text-muted">Voting Ends {{question.dateEnds}}</small>
+            </div>
+            {%elif question.result != None%}
+            <div class="d-flex justify-content-between align-items-center">
+              <small class="text-muted">Voting Ended with Result = {{question.result}}</small>
+            </div>
+            {% endif %}
+
+          </div>
+        </div>
+    </form>
+    {% endif %}
+
+
+    
+  </center>
+
+
+{%endblock content %}
+
+<!-- {%block head_title %} Crowd Predictive Analytics {%endblock head_title %}
+
 
 <div class='row text-center'>
   <div class="col">
@@ -14,19 +64,12 @@
         <form class ='form' method='POST' action='/{{question.slug}}/'> 
           {% csrf_token %}
           <input type='hidden' value='/' name='next' />
-           <button type='submit' class = 'btn btn-primary'> Submit Vote</button> 
+           <button type='submit' class = 'btn btn-primary'> Vote Yes</button> 
+           <button type='submit' class = 'btn btn-primary'> Vote Yes</button> 
           </form> 
         </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
 
 
 <script>
@@ -117,4 +160,4 @@ function formatQuestionElement(q) {
 </script>
 
 
-{%endblock content %}
+ -->

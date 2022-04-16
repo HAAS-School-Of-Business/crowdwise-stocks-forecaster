@@ -10,7 +10,7 @@ from accounts import views as a_views
 from django.conf import settings
 from django.conf.urls.static import static
 
-from question.views import (home_view, question_detail_view, question_list_view, vote_submit_view)
+from question.views import (home_view,  question_list_view, vote_submit_view)
 
 
 urlpatterns = [
@@ -19,9 +19,8 @@ urlpatterns = [
     path('submit-vote/', q_views.vote_submit_view),
     path('submit-vote', q_views.vote_submit_view),
     path('questions/', q_views.question_list_view),
-    path('questions/<int:question_id>', q_views.question_detail_view),
     path('profile/', a_views.profile, name='profile'),
-
+    path('<slug:question>/', q_views.vote_single, name='vote_single'),
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls', namespace='accounts')),
     path('accounts/', include('django.contrib.auth.urls')),
