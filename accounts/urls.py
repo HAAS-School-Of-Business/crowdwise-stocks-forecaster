@@ -15,6 +15,7 @@ urlpatterns = [
                                                                    form_class=PwdChangeForm), name='pwdforgot'),
     path('login/', auth_views.LoginView.as_view(template_name="accounts/login.html",
                                                 authentication_form=UserLoginForm), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(template_name="accounts/logged_out.html") , name='logout'),
     path('password_reset/', auth_views.PasswordResetView.as_view(template_name="accounts/password_reset_form.html",
                                                                  form_class=PwdResetForm), name='pwdreset'),
     path('password_reset_confirm/<uidb64>/<token>', auth_views.PasswordResetConfirmView.as_view(
@@ -23,4 +24,4 @@ urlpatterns = [
     path('profile/edit/', views.edit, name='edit'),
     path('profile/delete/', views.delete_user, name='deleteuser'),
     path('register/', views.accounts_register, name='register')
-]
+]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

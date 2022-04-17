@@ -1,115 +1,67 @@
-<!-- {% extends 'base.html' %}
-{%block head_title %} Crowd Predictive Analytics {%endblock head_title %}
-{%block content %} -->
-
-<div class='row text-center'>
-    <div class="col">
-        <h1>Welcome to Crowd Predictive Analytics</h1>
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+<section id="feature-section" class="feature-section wf-section">
+  <div class="flex-container w-container">
+    <div>
+      <h2 class="heading-3">WISDOM OF THE CROWD</h2>
+      <small class="text-muted">Submit your response, gain credibility. Contribute to the Wisdom of the crowd.</small>
+      <div class="div-block">
+        <div class="lottie-animation-2" data-w-id="dc6621e7-46a8-92eb-bf07-cedcba2490d2" data-animation-type="lottie" data-src="{% static 'documents/cubes.json' %}" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="3" data-duration="0"></div>
+      </div>
+      <div class="rich-text-block w-richtext">
+        <h4><em>{{done}} Questions Completed</em></h4>
+        <h4 class="done-text"><em>{{not_done}} Questions In Progress</em></h4>
+      </div>
     </div>
+    <div data-w-id="3f175161-ceca-fc15-a489-1f76e54ceb21" data-animation-type="lottie" data-src="{% static 'documents/crowdcharts.json' %}" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="12" data-duration="0"></div>
+  </div>
+</section>
+
+
+<div class="container">
+    {%if not_done == 0 %}
+    <h1 class="heading-4"> No Questions in Progress</h1>
+    {%else%}
+        <h1 class="heading-4">Questions in Progress</h1>
+      {%endif%}  
+
 </div>
-
-
-
-<div class='row' id='questions'>
-
+<div class="container">
+  <div class="py-5">
+    <div class="row">
+      {% for q in questions %}
+      {% if  q.result == None %}
+      <div class="col-md-4">
+        <div class="card mb-4 box-shadow">
+          <div class="card-body">
+              <h2 style="font-size:18px;font-weight:bold">{{q.question}}</h2>
+              <div class="d-flex justify-content-between align-items-center">
+                <small class="text-muted">Voting Ends - {{q.dateEnds}}</small>
+              </div>
+          </div>
+        </div>
+      </div>
+        {%endif%}  
+  {% endfor %}           
+    </div>
+  </div>
 </div>
-
-<div class = 'col-md-4 mx-auto col-10'>
-    <form class ='form' id='question-create-form' method='POST' action='/submit-vote'>
-        {% csrf_token %}
-        <input type='hidden' value='/' name='next' />
-        <button type='submit' class = 'btn btn-primary'> Submit</button> 
-    </form> 
+{% if request.user.is_authenticated %}
+<div class="container">
+    <a class="p-2 text-dark" href="{% url "accounts:profile"%}">Go To Dashboard</a>
+    <small class="text-muted"> to Vote. </small>
 </div>
+{%endif%}  
+{% if not request.user.is_authenticated %}
+<div class="container">
+  <a class="p-2 text-dark" href="{% url "accounts:register" %}">Register</a>
+  <small class="text-muted"> or </small>
+  <a class="p-2 text-dark" href="{% url "login" %}">Login</a>
+  <small class="text-muted"> to Vote. </small>
+</div>
+{%endif%}  
 
 
-
-<script>
-
-function handleFormSubmit(event){
-    event.preventDefault()
-    const myForm = event.target
-    const myFormData = new FormData(myForm)
-    const endpoint = myForm.getAttribute("action")
-    const method = myForm.getAttribute("method")
-    const xhr = new XMLHttpRequest()
-    xhr.open(method,url)
-    xhr.setRequestHeader("HTTP_X_REQUESTED_WITH", "XMLHttpRequest")
-    xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest")
-    xhr.onload=function(){
-        const serverResponse = xhr.response
-        console.log(serverResponse)
-    }
-    xhr.send(myFormData)
-
-}
-const questionEl = document.getElementById('questions')
-
-const questionCrEl  = document.getElementById('question-create-form')
-
-questionCrEl.addEventListener("submit",handleFormSubmit )
-
-function loadQuestions(questionElement) {
-    const xhr = new XMLHttpRequest()
-    const method = 'GET'
-    const url = '/questions/'
-    const responseType='json'
-    xhr.responseType = responseType
-    xhr.open(method, url)
-    xhr.onload = function() {
-    const serverResponse = xhr.response
-    var listedItems=serverResponse.response
-    var finalQuestionStr = ''
-    for (var i=0; i< listedItems.length; i++){
-        console.log(i)
-        console.log(listedItems[i])
-        var questionObj = listedItems[i]
-        var currentItem = formatQuestionElement(questionObj)
-        finalQuestionStr += currentItem
-    }
-    questionElement.innerHTML  = finalQuestionStr
-    console.log(listedItems)
-}
-xhr.send()
-
-}
-
-loadQuestions(questionEl)
-
-// questionElement.innerHTML = 'Loading.....'
-
-
-
-function submitNoVote(question_id, currentCount) {
-    console.log(question_id, currentCount)
-
-}
-
-function submitYesVote(question_id, currentCount) {
-
-
-}
-
-function voteYes(question) {
-    return "<button class='btn btn-primary'onclick=submitYesVote("+question.id+", "+question.yesVotes+")> Yes </button>"
-}
-function voteNo(question){
-    return "<button class='btn btn-primary' onclick=submitNoVote("+question.id+", "+question.noVotes+")> No </button>"
-}
-
-function submit() {
-    return "<div class = 'col-md-4 mx-auto col-10'><form class ='form' method='POST' action='/submit-vote'> <input type='hidden' value='/' name='next' /> <button type='submit' class = 'btn btn-primary'> Submit</button> </form> </div>"
-}
-
-function formatQuestionElement(q) {
-    var formattedQuestion = "<div class='col-12 col-md-10  border-top border-bottom py-3 mb-4 question' id='question-" + q.id + "'><p>" + q.question + "<\p><div class='btn-group'>"+
-    voteYes(q)+ "   " +voteNo(q)+
-    "</div>"
-    return formattedQuestion
-}
-
-
-</script>
-
-
-{%endblock content %}
+{% endblock %}

@@ -70,10 +70,12 @@ def avatar(request):
 @login_required
 def profile(request):
     all_questions = Question.newmanager.all()
-
+    accuracy = request.user.profile.accuracy
+    q_count = request.user.profile.questions_answered_count
+    choices = request.user.profile.choices.all()
     return render(request,
                   'accounts/profile.html',
-                  {'questions': all_questions}, status=200)
+                  {'questions': all_questions, 'accuracy': accuracy, 'count':q_count, 'choices':choices}, status=200)
 
 
 @login_required
@@ -120,6 +122,7 @@ def accounts_register(request):
             user.set_password(registerForm.cleaned_data['password'])
             user.is_active = True
             user.save()
+        return redirect('/')
             # current_site = get_current_site(request)
             # subject = 'Activate your Account'
             # message = render_to_string('registration/account_activation_email.html', {

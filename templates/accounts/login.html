@@ -36,7 +36,7 @@
 </style>
 
 
-<div class="container-fluid">
+<div class="container">
     <div class="row no-gutter">
         <div class="col-md-6 bg-light">
             <div class="login d-flex align-items-center py-5">
@@ -92,7 +92,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 d-none d-md-flex bg-image"></div>
-    </div>
+        {% load static %}
+        <div class="w-col w-col-6">
+            <div class="lottie-animation-6" data-w-id="f29be784-937b-b192-cf06-300d1ac9146b" data-animation-type="lottie" data-src="{% static 'documents/cubes.json' %}" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="3" data-duration="0"></div>
+          </div>    </div>
 </div>
 {% endblock %}

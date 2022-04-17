@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "sslserver",
     'accounts'  ,
     'question' 
 ]
@@ -124,9 +125,12 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATIC_URL = '/static/'
+
+
 STATIC_ROOT = '/static/'
-STATICFILES_FINDERS = [
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+    '/var/www/static/',
 ]
 LOGIN_REDIRECT_URL = 'accounts:profile'
 LOGIN_URL = 'login'

@@ -32,7 +32,10 @@ class Profile(models.Model):
     @property
     def accuracy(self):        
         "Returns the Accuracy percentage of the user"
-        return (self.correct_answers / self.questions_answered) *100
+        if self.questions_answered_count != 0:
+            return (self.correct_answers / self.questions_answered_count) *100
+        else:
+            return 0
 
 
     def clean(self):

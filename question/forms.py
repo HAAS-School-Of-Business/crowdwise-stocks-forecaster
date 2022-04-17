@@ -14,5 +14,8 @@ class ChoiceForm(forms.ModelForm):
 
 
 
-
+class QuestionForm(forms.ModelForm):
+    class Meta:
+        model = Question
+        fields = ['result', 'question']
 

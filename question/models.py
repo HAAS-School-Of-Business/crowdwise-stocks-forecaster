@@ -23,8 +23,20 @@ def join_q(request, question, resp):
         q.noVotes = q.noVotes + 1
     request.user.profile.questions_answered.add(q)
     q.voters.add(request.user)
+    q.save()
     return
 
+def resolve(request, question, answer):
+    q = Question.objects.get(slug=question)
+    voters = q.voters.all()
+    choices = Choice.objects.get(question=q)
+    for v in voters:
+        if choices.response == answer:
+            v.profile.correct_answers = v.profile.correct_answers + 1
+        v.profile.questions_answered_count = v.profile.questions_answered_count + 1
+        v.profile.save()
+        v.save()
+    return
 
 
 class Category(models.Model):
@@ -39,6 +51,8 @@ class Question(models.Model):
     class NewManager(models.Manager):
         def get_queryset(self):
             return super().get_queryset().all()
+        def count(self):
+            return len(super().get_queryset().all())
 
 
     question = models.TextField(blank=True, null=True)
@@ -65,6 +79,9 @@ class Question(models.Model):
     def get_absolute_url(self):
         return reverse('question:vote_single', args=[self.slug])
 
+    @property
+    def is_live(self):
+        return datetime.today() < self.dateEnds      
     @property
     def is_past_due(self):
         return datetime.today() > self
@@ -107,8 +124,8 @@ class Question(models.Model):
 
 class Choice(models.Model):
     class NewManager(models.Manager):
-        def get_queryset(self, q_id, user):
-            return super().get_queryset().filter(question_id=q_id).filter(user=user)
+        def get_queryset(self, ):
+            return super().get_queryset()
 
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING, default=None)
 
@@ -116,6 +133,10 @@ class Choice(models.Model):
     response = models.BooleanField(choices=BOOL_CHOICES, default=None)
     question = models.ForeignKey(Question, on_delete=models.PROTECT, null=True)
     answered = models.BooleanField(choices=BOOL_CHOICES, null=True)
+
+
+    objects = models.Manager()  # default manager
+    newmanager = NewManager()  # custom manager
 
 
 
