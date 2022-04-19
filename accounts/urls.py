@@ -1,8 +1,6 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from . import views
-from django.contrib.auth.decorators import user_passes_test
-from django.views.generic import TemplateView
 from django.contrib.auth import views as auth_views
 from .forms import UserLoginForm, PwdResetForm, PwdChangeForm, PwdResetForm, PwdResetConfirmForm
 from django.conf import settings
