@@ -28,14 +28,14 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY') or 'w0jsen6dqv1$s-x%j0f0yn&r_u-
 DEBUG=str(os.environ.get('DEBUG'))=='1'
 
 if DEBUG == False:
-    ALLOWED_HOSTS =[]
+    ALLOWED_HOSTS =['crowdpredictiveanalytics.com' , '127.0.0.1']
 
 ENV_ALLOWED_HOST = os.environ.get('DJANGO_ALLOWED_HOST') or None
 ALLOWED_HOSTS = []
 if ENV_ALLOWED_HOST is not None:
-    ALLOWED_HOSTS = [ ENV_ALLOWED_HOST ]
+    ALLOWED_HOSTS = [ ENV_ALLOWED_HOST, 'crowdpredictiveanalytics.com' ]
 
-
+ALLOWED_HOSTS =['crowdpredictiveanalytics.com' , '127.0.0.1:8000']
 
 # Application definition
 
@@ -92,11 +92,11 @@ WSGI_APPLICATION = 'crowdwise.wsgi.application'
 #     }
 # }
 
-POSTGRES_DB = os.environ.get("POSTGRES_DB")
-POSTGRES_PASSWORD = os.environ.get("POSTGRES_PASSWORD")
-POSTGRES_USER = os.environ.get("POSTGRES_USER")
-POSTGRES_HOST = os.environ.get("POSTGRES_HOST")
-POSTGRES_PORT = os.environ.get("POSTGRES_PORT")
+POSTGRES_DB =  os.environ.get('POSTGRES_DB')
+POSTGRES_PASSWORD = os.environ.get('POSTGRES_PASSWORD')
+POSTGRES_USER = os.environ.get('POSTGRES_USER')
+POSTGRES_HOST = os.environ.get('POSTGRES_HOST')
+POSTGRES_PORT = os.environ.get('POSTGRES_PORT')
 
 POSTGRES_READY = (
     POSTGRES_DB is not None
@@ -143,11 +143,12 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
+
 TIME_ZONE = 'UTC'
 
-USE_I18N = True
+USE_I18N = False
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
@@ -159,6 +160,8 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATIC_URL = '/static/'
+MEDIA_URL = '/static/'
+MEDIA_ROOT = '/static/'
 
 
 STATIC_ROOT = '/static/'
