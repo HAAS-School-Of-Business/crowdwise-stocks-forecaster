@@ -159,16 +159,13 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-STATIC_URL = '/static/'
-MEDIA_URL = '/static/'
-MEDIA_ROOT = '/static/'
+STATIC_URL = 'static/'
+MEDIA_URL = '/vol/static/'
+MEDIA_ROOT = '/vol/static/'
 
 
-STATIC_ROOT = '/static/'
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-    '/var/www/static/',
-]
+STATIC_ROOT = 'static/'
+
 LOGIN_REDIRECT_URL = 'accounts:profile'
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
