@@ -58,7 +58,7 @@ class Question(models.Model):
     dateEnds =  models.DateTimeField('end date', null=True)
     yesVotes = models.IntegerField(default=0)
     noVotes = models.IntegerField(default=0)
-    slug = models.SlugField(max_length=250, blank=True)
+    slug = models.SlugField(max_length=250, blank=True, null=True)
     voters = models.ManyToManyField(User, related_name='voters', blank=True)
     category = models.ForeignKey(Category, on_delete=models.PROTECT,blank=True, null=True)
     BOOL_CHOICES = ((True, 'Yes'), (False, 'No'))
@@ -100,40 +100,41 @@ class Question(models.Model):
         return
 
     def update_scores(self):
-        total_votes = self.yesVotes + self.noVotes
-        yes = self.yesVotes/total_votes
-        no = self.noVotes/total_votes
-        self.equal_w_score_yes = yes
-        self.equal_w_score_no = no
-        self.equal_w_score_yes = self.equal_w_score_yes*100
-        self.equal_w_score_no = self.equal_w_score_no*100
+        if self.is_live():
+            total_votes = self.yesVotes + self.noVotes
+            yes = self.yesVotes/total_votes
+            no = self.noVotes/total_votes
+            self.equal_w_score_yes = yes
+            self.equal_w_score_no = no
+            self.equal_w_score_yes = self.equal_w_score_yes*100
+            self.equal_w_score_no = self.equal_w_score_no*100
 
-        denom_yes = []
-        numerator_yes = []
-        try:
-            voters = self.voters.all()
-            for vtr in voters:
-                choices = vtr.profile.choices.all()
-                for c in choices:
-                    accuracy_score = (vtr.profile.correct_answers/vtr.profile.questions_answered_count)*100
-                    if c.question.slug == self.slug:
-                        if  c.answer:
-                            vtr.save()
-                            vtr.profile.save()
-                            numerator_yes.append(accuracy_score)
-                        denom_yes.append(accuracy_score)
+            denom_yes = []
+            numerator_yes = []
+            try:
+                voters = self.voters.all()
+                for vtr in voters:
+                    choices = vtr.profile.choices.all()
+                    for c in choices:
+                        accuracy_score = (vtr.profile.correct_answers/vtr.profile.questions_answered_count)*100
+                        if c.question.slug == self.slug:
+                            if  c.answer:
+                                vtr.save()
+                                vtr.profile.save()
+                                numerator_yes.append(accuracy_score)
+                            denom_yes.append(accuracy_score)
 
-            d = sum(denom_yes)
-            n = sum(numerator_yes)
-            yes = (n/d)*100
-            no = 100-yes
-            self.avg_w_score_no = no
-            self.avg_w_score_yes = yes
-            self.save()
-            return
-        except:
-            print('Error in Updating The Scores')
-            return
+                d = sum(denom_yes)
+                n = sum(numerator_yes)
+                yes = (n/d)*100
+                no = 100-yes
+                self.avg_w_score_no = no
+                self.avg_w_score_yes = yes
+                self.save()
+                return
+            except:
+                print('Error in Updating The Scores')
+                return
 
 
     

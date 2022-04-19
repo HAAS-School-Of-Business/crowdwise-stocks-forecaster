@@ -11,7 +11,7 @@ from django.shortcuts import render, get_object_or_404, HttpResponseRedirect
 
 # from django.utils.http import is_safe_url
 
-from crowdwise.settings import ALLOWED_HOSTS
+from crowdpredictiveanalytics.settings import ALLOWED_HOSTS
 
 from .models import Question, join_q, Choice, resolve
 from .forms import ChoiceForm, QuestionForm
