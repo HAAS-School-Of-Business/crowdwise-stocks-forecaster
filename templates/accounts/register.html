@@ -1,4 +1,4 @@
-{% extends "../base.html" %}
+{% extends "base.html" %}
 {% block title %}Log-in{% endblock %}
 {% block content %}
 
@@ -7,19 +7,19 @@
     window.location.href = '{% url "accounts:profile" %}';
 </script>
 {% endif %}
+<style>
 
+.hh{
+    justify-content: center;
+    column-count: 2;
+    padding-top: 75px;
+    padding-left: 110px;
+    padding-right: 110px;
+    }
+</style>
 
-
-
-<div class="container">
-    <div class="row no-gutter">
-        <div class="col-md-6 bg-light">
-            <div class="login d-flex align-items-center py-5">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12 col-md-12 mx-auto">
-
-                            <form class="account-form p-4 rounded col-lg-10 mx-auto" action="." method="post">
+<div class="hh">
+                            <form class="account-form p-4 rounded col-lg-10 mx-auto" method="POST">
                                 {% csrf_token %}
                                 <p class="h4 mb-2 font-weight-bold">Create an account</p>
                                 <p class="mb-4">It's free and only takes a minute.</p>
@@ -51,38 +51,13 @@
                                 <small class="form-text text-muted mb-4">
                                     Repeat password
                                 </small>
-
                                 <button class="btn btn-dark btn-block py-2 mb-4 mt-5 font-weight-bold"
-                                    type="submit">Register</button>
-
-                                <hr class="mb-3">
-                                <p class="small text-center">By clicking on register, you agree to Crowd Predictive Analytics <a href="">Terms
-                                        of
-                                        Service</a> and
-                                    consent to
-                                    our <a href="">Cookie Policy</a> and <a href="">Privacy Policy</a>. This site is not
-                                    protected
-                                    by reCAPTCHA and
-                                    is a demonstration website
-                                    for learning purposes only.
-                                </p>
+                                    type="Submit" name="'Register">Register</button>
                             </form>
 
-                            <p class="small text-center pt-4">
-                                <a href="{% url "accounts:login" %}">Already have an account?</a>
-                            </p>
-                            <p class="small text-center">
-                                <a href="{% url "accounts:register" %}">Help Center?</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         {% load static %}
-        <div class="w-col w-col-6">
-            <div class="lottie-animation-6" data-w-id="f29be784-937b-b192-cf06-300d1ac9146b" data-animation-type="lottie" data-src="{% static 'documents/cubes.json' %}" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="3" data-duration="0"></div>
-          </div>    </div>
+        <div class="">
+            <div class="lottie-animation-6" data-w-id="f29be784-937b-b192-cf06-300d1ac9146b" data-animation-type="lottie" data-src="{% static 'documents/cubes.json' %}" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="3" data-duration="0"></div> 
+        </div>
     </div>
-</div>
 {% endblock %}
