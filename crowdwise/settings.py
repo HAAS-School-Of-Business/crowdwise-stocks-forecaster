@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'question' ,
 ]
 
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -167,14 +168,14 @@ MEDIA_URL = '/vol/static/'
 MEDIA_ROOT = '/vol/static/'
 
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_URL = '/static/'
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = 'static/'
+STATIC_ROOT = 'static/'
 
-# Extra places for collectstatic to find static files.
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
 
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    ]
 LOGIN_REDIRECT_URL = 'accounts:profile'
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
