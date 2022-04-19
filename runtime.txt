@@ -1,1 +1,2 @@
 python-3.8.2
+heroku config:set DEBUG_COLLECTSTATIC=1
