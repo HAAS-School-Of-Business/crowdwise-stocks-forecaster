@@ -3,7 +3,6 @@ from django import utils, forms
 from django.conf import settings
 import datetime as dt
 from django.urls import reverse
-from requests import request
 
 import question
 
