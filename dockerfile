@@ -1,3 +1,0 @@
-FROM python:3.8-slim-buster
-COPY . /CROWDISE-STOCKS_FORECASTER
-CMD python3 /CROWDISE-STOCKS_FORECASTER/manage.py runserver

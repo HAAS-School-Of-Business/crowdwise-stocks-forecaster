@@ -17,13 +17,12 @@ APPEND_SLASH=False
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-mnfoq3kvdq!)0^9bw8(7nhb+km1zzf8)*@@8#m4449faihrw$9'
+SECRET_KEY = 'vusq^wirhp46n+$--&_kt*=on61_&*s@88b$$8@1hp#7d&s73'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG=False
 
 ALLOWED_HOSTS = ['*']
-
 
 
 # Application definition
@@ -143,7 +142,7 @@ MEDIA_URL = '/vol/static/'
 STATIC_ROOT = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
-    '/var/www/static/',
+    '/vol/www/static/',
 ]
 LOGIN_REDIRECT_URL = 'accounts:profile'
 LOGIN_URL = 'login'
