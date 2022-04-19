@@ -81,27 +81,6 @@ WSGI_APPLICATION = 'crowdpredictiveanalytics.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': str(BASE_DIR / 'db.sqlite3'),
-    # }
-        'default': {
-
-        'ENGINE': 'django.db.backends.postgresql',
-
-        'NAME': 'defaultdb',
-
-        'USER': 'doadmin',
-
-        'PASSWORD': 'AVNS_w9g61bUl4uRTNYw',
-
-        'HOST': 'db-postgresql-sfo2-63904-do-user-11397652-0.b.db.ondigitalocean.com',
-
-        'PORT': '25060',
-
-    }
-}
 
 POSTGRES_DB = os.environ.get("POSTGRES_DB")
 POSTGRES_PASSWORD = os.environ.get("POSTGRES_PASSWORD")
@@ -128,6 +107,14 @@ if POSTGRES_READY:
             "PORT": POSTGRES_PORT,
         }
     }
+else:
+    DATABASES = {
+    'default': {
+        'ENGINE': '',
+        'NAME': '',
+    }
+}
+
 
 
 # Password validation
@@ -190,8 +177,6 @@ from .cdn.conf import * # noqa
 #Test
 #AWS_KEY Y6VDTVH6EIGAM3YQP3XX
 #AWS_PASS = h8/UYJmd3gB9pmOTecdf5OFIoyCLtzdZbpjQieS/Bq0
-
-#PROD
 
 LOGIN_REDIRECT_URL = 'accounts:profile'
 LOGIN_URL = 'login'
