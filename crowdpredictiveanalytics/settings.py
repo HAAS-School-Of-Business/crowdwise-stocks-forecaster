@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts',
-    'question'
+    'question',
+    'storages'
+
 
 ]
 
@@ -167,15 +169,30 @@ LANGUAGE_CODE = 'en-us'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-STATIC_URL = '/static/'
-MEDIA_ROOT = '/vol/static/'
 MEDIA_URL = '/vol/static/'
 
-STATIC_ROOT = '/static/'
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-    '/vol/www/static/',
-]
+STATIC_URL = '/static/'
+
+# Add these new lines
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+STATIC_ROOT = BASE_DIR / "staticfiles-cdn" # in production, we want cdn
+
+
+MEDIA_ROOT = BASE_DIR / "staticfiles-cdn" / "uploads"
+
+from .cdn.conf import * # noqa
+
+#Where the files are stored
+#ttps://crowd-predictive-analytics.nyc3.digitaloceanspaces.com
+#Test
+#AWS_KEY Y6VDTVH6EIGAM3YQP3XX
+#AWS_PASS = h8/UYJmd3gB9pmOTecdf5OFIoyCLtzdZbpjQieS/Bq0
+
+#PROD
+
 LOGIN_REDIRECT_URL = 'accounts:profile'
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
