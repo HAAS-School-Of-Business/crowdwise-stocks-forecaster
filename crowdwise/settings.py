@@ -20,12 +20,20 @@ APPEND_SLASH=False
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-mnfoq3kvdq!)0^9bw8(7nhb+km1zzf8)*@@8#m4449faihrw$9'
+# SECRET_KEY = 'django-insecure-mnfoq3kvdq!)0^9bw8(7nhb+km1zzf8)*@@8#m4449faihrw$9'
+
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY') or 'w0jsen6dqv1$s-x%j0f0yn&r_u-2d3epo%rq9jk15)7&_f212a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG=str(os.environ.get('DEBUG'))=='1'
 
-ALLOWED_HOSTS = ['127.0.0.1']
+if DEBUG == False:
+    ALLOWED_HOSTS =[]
+
+ENV_ALLOWED_HOST = os.environ.get('DJANGO_ALLOWED_HOST') or None
+ALLOWED_HOSTS = []
+if ENV_ALLOWED_HOST is not None:
+    ALLOWED_HOSTS = [ ENV_ALLOWED_HOST ]
 
 
 
@@ -40,7 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "sslserver",
     'accounts'  ,
-    'question' 
+    'question' ,
 ]
 
 MIDDLEWARE = [
@@ -77,12 +85,38 @@ WSGI_APPLICATION = 'crowdwise.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+POSTGRES_DB = os.environ.get("POSTGRES_DB")
+POSTGRES_PASSWORD = os.environ.get("POSTGRES_PASSWORD")
+POSTGRES_USER = os.environ.get("POSTGRES_USER")
+POSTGRES_HOST = os.environ.get("POSTGRES_HOST")
+POSTGRES_PORT = os.environ.get("POSTGRES_PORT")
+
+POSTGRES_READY = (
+    POSTGRES_DB is not None
+    and POSTGRES_PASSWORD is not None
+    and POSTGRES_USER is not None
+    and POSTGRES_HOST is not None
+    and POSTGRES_PORT is not None
+)
+
+if POSTGRES_READY:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": POSTGRES_DB,
+            "USER": POSTGRES_USER,
+            "PASSWORD": POSTGRES_PASSWORD,
+            "HOST": POSTGRES_HOST,
+            "PORT": POSTGRES_PORT,
+        }
     }
-}
 
 
 # Password validation

@@ -2,8 +2,86 @@
 {% block content %}
 {% load static %}
   <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <style>
+  @import url("https://fonts.googleapis.com/css2?family=Poppins:weight@100;200;300;400;500;600;700;800&display=swap");
 
-  <div class="w-row">
+.containerprof {
+    height: 100vh
+}
+
+.cardprof{
+    width: 380px;
+    border: none;
+    border-radius: 15px;
+    padding: 8px;
+    background-color: #fff;
+    position: relative;
+    height: 370px
+}
+
+.upper {
+    height: 100px
+}
+
+.upper img {
+    width: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px
+}
+
+.user {
+    position: relative
+}
+
+.profile img {
+    height: 80px;
+    width: 80px;
+    margin-top: 2px
+}
+
+.profile {
+    position: absolute;
+    top: -50px;
+    left: 38%;
+    height: 90px;
+    width: 90px;
+    border: 3px solid #fff;
+    border-radius: 50%
+}
+
+.follow {
+    border-radius: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 35px
+}
+
+.stats span {
+    font-size: 22px
+}
+.stats{
+  padding-left: 25px;
+}
+</style>
+
+  <div class="d-flex justify-content-center align-items-center">
+    <lottie-player src="https://assets9.lottiefiles.com/packages/lf20_ofa3xwo7.json" background="transparent"  speed="1"  style="width: 300px; height: 300px;" loop autoplay></lottie-player>
+
+        <div class="mt-5 text-center">
+            <h4 class="mb-0">@{{request.user.username}}</h4> <span class="text-muted d-block mb-2"></span> <button class="btn btn-primary btn-sm follow">Follow</button>
+            <div class="d-flex justify-content-between align-items-center mt-4 px-4">
+                <div class="stats">
+                    <h9 class="mb-0">Questions Answered</h9><br> <span>{{user.profile.questions_answered_count}}</span>
+                </div>
+                <div class="stats padding-left">
+                    <h9 class="mb-0">Calculated Accuracy</h9><br><span>{{user.profile.accuracy}} %</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+  <!-- <div class="w-row">
     <div class="column-4 w-col w-col-6">    
       <lottie-player src="https://assets9.lottiefiles.com/packages/lf20_ofa3xwo7.json" background="transparent"  speed="1"  style="width: 300px; height: 300px;" loop autoplay></lottie-player>
       </div>
@@ -21,6 +99,7 @@
     </div>
   </div>
   <br><br>‍<br>
+-->
   <div class="container">
     {%if not_done == 0 %}
     <h1 class="heading-4"> No Questions in Progress</h1>
@@ -28,8 +107,9 @@
         <h1 class="heading-4">Questions in Progress</h1>
       {%endif%}  
 
-</div>
-<div class="container">
+</div> 
+
+<div class="container border-top border-bottom ">
   <div class="py-5">
     <div class="row">
       {% for q in questions %}
@@ -54,21 +134,19 @@
         {%endif%}  
   {% endfor %}           
     </div>
-  </div>
 </div>
-<!-- This is for questions they have answered before.  -->
+</div>
 <br><br>‍<br>
-<div class="container">
-  {%if count == 0 %}
-      <h1 class="heading-4">Questions Completed</h1>
-    {%endif%}  
+<div class="container ">
+<h1 class="heading-4">Questions Completed</h1>
 </div>
-<div class="container">
+<div class="container border-top border-bottom">
   <div class="py-5">
     <div class="row">
       {% for q in questions %}
       {% if  q.result != None %}
       <div class="col-md-4">
+        <a class="text-dark" href="{{q.get_absolute_url}}">
         <div class="card mb-4 box-shadow">
           <div class="card-body">
               <h2 style="font-size:18px;font-weight:bold">{{q.question}}</h2>
@@ -83,6 +161,7 @@
               </div>
           </div>
         </div>
+        </a>
       </div>
         {%endif%}  
   {% endfor %}           

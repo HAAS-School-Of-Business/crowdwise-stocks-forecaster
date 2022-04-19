@@ -5,6 +5,8 @@ import datetime as dt
 from django.urls import reverse
 from requests import request
 
+import question
+
 
 # Create your models here.
 User=settings.AUTH_USER_MODEL
@@ -17,10 +19,6 @@ from datetime import datetime
 
 def join_q(request, question, resp):
     q = Question.objects.get(slug=question)
-    if resp:
-        q.yesVotes = q.yesVotes + 1
-    else:
-        q.noVotes = q.noVotes + 1
     request.user.profile.questions_answered.add(q)
     q.voters.add(request.user)
     q.save()
@@ -28,10 +26,10 @@ def join_q(request, question, resp):
 
 def resolve(request, question, answer):
     q = Question.objects.get(slug=question)
-    voters = q.voters.all()
-    choices = Choice.objects.get(question=q)
-    for v in voters:
-        if choices.response == answer:
+    choices = Choice.objects.get_queryset().filter(question=q.id)
+    for c in choices:
+        v = c.user
+        if c.answer == answer:
             v.profile.correct_answers = v.profile.correct_answers + 1
         v.profile.questions_answered_count = v.profile.questions_answered_count + 1
         v.profile.save()
@@ -79,6 +77,12 @@ class Question(models.Model):
     def get_absolute_url(self):
         return reverse('question:vote_single', args=[self.slug])
 
+    def getScores(self):
+        self.update_scores()
+        self.save()
+        totalVotes = self.yesVotes + self.noVotes
+        return {1:str(self.equal_w_score_yes), 2: str(self.equal_w_score_no), 3: str(self.avg_w_score_yes), 4:str(self.avg_w_score_no), 5: str(totalVotes)}
+
     @property
     def is_live(self):
         return datetime.today() < self.dateEnds      
@@ -89,7 +93,6 @@ class Question(models.Model):
     def addYesVote(self):
         self.yesVotes = self.yesVotes + 1
         self.save()
-
         return
 
     def addNoVote(self):
@@ -103,21 +106,35 @@ class Question(models.Model):
         no = self.noVotes/total_votes
         self.equal_w_score_yes = yes
         self.equal_w_score_no = no
+        self.equal_w_score_yes = self.equal_w_score_yes*100
+        self.equal_w_score_no = self.equal_w_score_no*100
 
         denom_yes = []
         numerator_yes = []
-        for vtr in self.voters.all():
-            response = Choice.objects.get(user=request.user, question=self).response
-            if response:
-                denom_yes.append((vtr.questions_answered_count*vtr.correct_answers)*10)
-                numerator_yes.append(vtr.questions_answered_count*vtr.correct_answers)
-        d = sum(denom_yes)
-        n = sum(numerator_yes)
-        yes = (n/d)*100
-        no = 100-yes
-        self.avg_w_score_no = no
-        self.avg_w_score_yes = yes
-        return
+        try:
+            voters = self.voters.all()
+            for vtr in voters:
+                choices = vtr.profile.choices.all()
+                for c in choices:
+                    accuracy_score = (vtr.profile.correct_answers/vtr.profile.questions_answered_count)*100
+                    if c.question.slug == self.slug:
+                        if  c.answer:
+                            vtr.save()
+                            vtr.profile.save()
+                            numerator_yes.append(accuracy_score)
+                        denom_yes.append(accuracy_score)
+
+            d = sum(denom_yes)
+            n = sum(numerator_yes)
+            yes = (n/d)*100
+            no = 100-yes
+            self.avg_w_score_no = no
+            self.avg_w_score_yes = yes
+            self.save()
+            return
+        except:
+            print('Error in Updating The Scores')
+            return
 
 
     
@@ -130,9 +147,10 @@ class Choice(models.Model):
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING, default=None)
 
     BOOL_CHOICES = ((True, 'Yes'), (False, 'No'))
-    response = models.BooleanField(choices=BOOL_CHOICES, default=None)
+    user_responded = models.BooleanField(choices=BOOL_CHOICES, default=None)
     question = models.ForeignKey(Question, on_delete=models.PROTECT, null=True)
-    answered = models.BooleanField(choices=BOOL_CHOICES, null=True)
+    # what their answer was
+    answer = models.BooleanField(choices=BOOL_CHOICES, null=True)
 
 
     objects = models.Manager()  # default manager

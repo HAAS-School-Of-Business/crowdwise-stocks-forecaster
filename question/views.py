@@ -91,7 +91,7 @@ def vote_single(request, question):
             resolve(request, question, False)
             print('resoleFalse')
         return redirect('/')
-    if request.method == "POST" :
+    elif request.method == "POST" and not superuser and not voted:
         form = ChoiceForm()
         if request.POST.get('Yes') and not voted:
             response=True
@@ -103,8 +103,8 @@ def vote_single(request, question):
         obj = form.save(commit=False)
         obj.question = q
         obj.user = request.user
-        obj.answered = True
-        obj.response =response
+        obj.user_responded = True
+        obj.answer = response
         obj.save()
         request.user.profile.choices.add(obj)
         return HttpResponseRedirect('/' + q.slug +'/?voted=True' )
@@ -113,7 +113,7 @@ def vote_single(request, question):
         if 'voted' in request.GET:
             voted = True
         if request.method == "GET" and q in request.user.profile.questions_answered.all():
-            response = Choice.objects.get(user=request.user, question=q).response
+            response = Choice.objects.get(user=request.user, question=q.id).answer
     
     return render(request, 'question/single.html', {'question': q, 'form':form, 'superuser': superuser,'voted': voted, 'user': request.user, 'response': response})
 

@@ -24,26 +24,19 @@
         max-width: 100%;
     }
 
-    .account-form input {
-        border: 2px solid #ccc;
-        height: calc(2em + .75rem + 2px);
-    }
 
-    .account-form input:focus {
-        border-color: #1497ff;
-        box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.075), 0 0 0px rgba(255, 0, 0, 0.6);
+    .hh{
+    justify-content: center;
+    column-count: 2;
+    padding-top: 75px;
+    padding-left: 110px;
+    padding-right: 110px;
     }
 </style>
 
 
-<div class="container">
-    <div class="row no-gutter">
-        <div class="col-md-6 bg-light">
-            <div class="login d-flex align-items-center py-5">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12 col-md-12  mx-auto">
-
+      <div class="hh">
+                        <div class="account-form">
                             <form class="account-form p-4 rounded" action="{% url 'login' %}" method="post">
 
                                 {% csrf_token %}
@@ -81,20 +74,13 @@
                                     for learning purposes only.
                                 </p>
                             </form>
-                            <p class="small text-center pt-4">
-                                <a href="{% url "password_reset" %}">Forgotten Password?</a>
-                            </p>
-                            <p class="small text-center">
-                                <a href="{% url "accounts:register" %}">Help Center?</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+
         </div>
         {% load static %}
-        <div class="w-col w-col-6">
-            <div class="lottie-animation-6" data-w-id="f29be784-937b-b192-cf06-300d1ac9146b" data-animation-type="lottie" data-src="{% static 'documents/cubes.json' %}" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="3" data-duration="0"></div>
-          </div>    </div>
-</div>
+      <div>
+            <div class="lottie-animation-6" data-w-id="f29be784-937b-b192-cf06-300d1ac9146b" data-animation-type="lottie" data-src="{% static 'documents/cubes.json' %}" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="3" data-duration="0"></div> 
+        </div>
+      </div>
+
 {% endblock %}

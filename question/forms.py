@@ -10,7 +10,7 @@ from .models import Question, Choice
 class ChoiceForm(forms.ModelForm):
     class Meta:
         model = Choice
-        fields = ['user','response', 'question', 'answered']
+        fields = ['user','user_responded', 'question', 'answer']
 
 
 

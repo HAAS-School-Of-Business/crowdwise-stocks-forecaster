@@ -21,8 +21,7 @@ class Profile(models.Model):
         return super().get_queryset().filter(self.choices)
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    avatar = models.ImageField(
-    upload_to=user_directory_path, default=None)
+    avatar = models.ImageField(upload_to=user_directory_path, default=None, null=True)
     bio = models.TextField(max_length=500, blank=True)
     questions_answered = models.ManyToManyField(Question, null=True)
     choices = models.ManyToManyField(Choice, null=True)
