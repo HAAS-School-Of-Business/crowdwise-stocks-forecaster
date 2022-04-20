@@ -2,7 +2,9 @@
 
 
 {% block content %}
-
+<head>
+  <link rel="icon" href="#">
+</head>
 <style>
 .card {
   width: 50%;
@@ -100,6 +102,10 @@
        <div class="card-footer text-muted">
        Your Vote = No
        </div>
+       {%else%}
+       <div class="card-footer text-muted">
+        You Did Not Vote 
+        </div>
        {%endif%}
     </div>
 

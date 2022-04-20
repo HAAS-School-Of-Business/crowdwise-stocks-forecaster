@@ -2,8 +2,9 @@
 
 
 {% block content %}
-
-  <center> 
+<head>
+  <link rel="icon" href="#">
+</head>
     <form action="" method=POST >
       {% csrf_token %}
 
@@ -16,7 +17,7 @@
         <input type='submit' value='No' name='No' />
   
     </form>
-  </center>
+
 
 
 {%endblock content %}
