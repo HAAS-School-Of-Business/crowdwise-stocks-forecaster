@@ -22,7 +22,11 @@ class PwdResetConfirmForm(SetPasswordForm):
         label='Repeat password', widget=forms.PasswordInput(
             attrs={'class': 'form-control mb-3', 'placeholder': 'New Password', 'id': 'form-new-pass2'}))
 
+from django.views.decorators.cache import cache_page
+from django.views.decorators.csrf import csrf_protect
 
+@cache_page(60 * 15)
+@csrf_protect
 class UserLoginForm(AuthenticationForm):
 
     username = forms.CharField(widget=forms.TextInput(
