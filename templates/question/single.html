@@ -2,20 +2,6 @@
 
 
 {% block content %}
-<link href="{% static 'images/favicon.ico'%}" rel="shortcut icon" type="image/x-icon">
-<link href="{% static 'images/webclip.png'%}" rel="apple-touch-icon">
-<style>
-.card {
-  width: 50%;
-}
-.stats span {
-    font-size: 22px
-}
-.stats{
-  padding-left: 25px;
-}
-</style>
-
   <center>
     {% if voted %}
     <div class="card text-center">
@@ -114,7 +100,17 @@
 
     
   </center>
-
+  <style>
+    .card {
+      width: 50%;
+    }
+    .stats span {
+        font-size: 22px
+    }
+    .stats{
+      padding-left: 25px;
+    }
+    </style>
 
 {%endblock content %}
 
