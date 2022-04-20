@@ -19,11 +19,10 @@ APPEND_SLASH=False
 # SECURITY WARNING: keep the secret key used in production secret!
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG=True
+DEBUG=False
 
-# ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
-ALLOWED_HOSTS = ["my-app-ayrsm.ondigitalocean.app", "crowdpredictiveanalytics.com", "10.244.16.246","127.0.0.1,localhost" ]
-SECRET_KEY ='1ak(7(l(vf$fo5(7t4%czdw!_1y4o-(m6g-4wqe!0wijh8!xn*'
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
+SECRET_KEY= os.environ.get("SECRET_KEY")
 
 
 
@@ -38,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'question',
-    'storages',
+    'storages'
 ]
 
 MIDDLEWARE = [
