@@ -22,8 +22,8 @@ DEBUG=False
 
 # ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost, crowdpredictiveanalytics.com").split(",")
 SECRET_KEY= 'y2j!+h!gm$e$2l+t=6onxpie)!ppr866f^6g7wrq+k@^^ntt_c'
-ALLOWED_HOSTS=['crowdpredictiveanalyrics.com', "*"]
-
+ALLOWED_HOSTS=['crowdpredictiveanalytics.com/', "*", "my-app-pl8tf.ondigitalocean.app/"]
+DJANGO_ALLOWED_HOSTS = ['crowdpredictiveanalytics.com/', "*"]
 
 # Application definition
 
