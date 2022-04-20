@@ -108,7 +108,7 @@ def vote_single(request, question):
         obj.answer = response
         obj.save()
         request.user.profile.choices.add(obj)
-        return HttpResponseRedirect('/' + q.slug +'/?voted=True' )
+        return HttpResponseRedirect('/' + q.slug +'?voted=True' )
     else:
         form = ChoiceForm()
         if 'voted' in request.GET:
