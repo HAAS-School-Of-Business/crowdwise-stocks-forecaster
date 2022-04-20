@@ -8,7 +8,7 @@ from question import views as q_views
 from accounts import views as a_views
 from django.conf import settings
 from django.conf.urls.static import static
-
+import question
 from question.views import (home_view, question_list_view, vote_submit_view)
 
 

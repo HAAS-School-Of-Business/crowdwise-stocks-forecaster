@@ -17,10 +17,7 @@
     padding-right: 110px;
     }
 </style>
-<head>
-    {%load static %}
-    <link href="{% static images/favicon.ico%}" rel="shortcut icon" type="image/x-icon">
-    <link href="{% static images/webclip.png%}" rel="apple-touch-icon">  </head>
+
 
 <div class="hh">
                             <form class="account-form p-4 rounded col-lg-10 mx-auto" method="POST">
@@ -61,7 +58,7 @@
 
         {% load static %}
         <div class="">
-            <div class="lottie-animation-6" data-w-id="f29be784-937b-b192-cf06-300d1ac9146b" data-animation-type="lottie" data-src="{% static 'documents/cubes.json' %}" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="3" data-duration="0"></div> 
+            <img class = "lottie-animation-6" src = "{% static 'images/cubes.gif'%}">
         </div>
     </div>
 {% endblock %}

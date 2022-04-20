@@ -28,6 +28,7 @@ def home_view(request, *args, **kwargs):
     length = len(all_questions)
     not_done = len(Question.newmanager.all().filter(result=None))
     done = length-not_done
+
     if not request.user.is_anonymous:
         if request.method == "GET":
             profile = request.user.profile

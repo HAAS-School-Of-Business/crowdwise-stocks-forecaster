@@ -20,9 +20,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG=False
 
-ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
-SECRET_KEY= os.environ.get("SECRET_KEY")
-
+# ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost, crowdpredictiveanalytics.com").split(",")
+SECRET_KEY= 'y2j!+h!gm$e$2l+t=6onxpie)!ppr866f^6g7wrq+k@^^ntt_c'
+ALLOWED_HOSTS=['crowdpredictiveanalyrics.com', "*"]
 
 
 # Application definition
@@ -146,11 +146,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = ''
+TIME_ZONE = 'America/Los_Angeles'
 
-USE_I18N = True
+# USE_I18N = True
 
-USE_TZ = True
+# USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
@@ -167,7 +167,7 @@ STATIC_URL = '/static/'
 
 # Add these new lines
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'static/'),
 )
 
 STATIC_ROOT = BASE_DIR / "staticfiles-cdn" # in production, we want cdn
