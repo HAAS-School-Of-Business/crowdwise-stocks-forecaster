@@ -18,12 +18,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG=False
+DEBUG=True
 
 # ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost, crowdpredictiveanalytics.com").split(",")
 SECRET_KEY= 'y2j!+h!gm$e$2l+t=6onxpie)!ppr866f^6g7wrq+k@^^ntt_c'
-ALLOWED_HOSTS=['crowdpredictiveanalytics.com/', "*", "my-app-pl8tf.ondigitalocean.app/"]
-DJANGO_ALLOWED_HOSTS = ['crowdpredictiveanalytics.com/', "*"]
+ALLOWED_HOSTS=['crowdpredictiveanalytics.com/','crowdpredictiveanalytics.com',"www.crowdpredictiveanalytics.com/","www.crowdpredictiveanalytics.com", "*","www.my-app-pl8tf.ondigitalocean.app/", "my-app-pl8tf.ondigitalocean.app/"]
+DJANGO_ALLOWED_HOSTS = ['crowdpredictiveanalytics.com/','crowdpredictiveanalytics.com',"www.crowdpredictiveanalytics.com/","www.crowdpredictiveanalytics.com", "*","www.my-app-pl8tf.ondigitalocean.app/", "my-app-pl8tf.ondigitalocean.app/"]
+
 
 # Application definition
 
