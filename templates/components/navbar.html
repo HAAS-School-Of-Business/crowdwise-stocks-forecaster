@@ -1,8 +1,9 @@
 
 <!-- Font Awesome -->
 <head>
-  <link rel="icon" href="#">
-</head>
+  {%load static %}
+  <link href="{% static images/favicon.ico%}" rel="shortcut icon" type="image/x-icon">
+  <link href="{% static images/webclip.png%}" rel="apple-touch-icon"></head>
 <link
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
   rel="stylesheet"
@@ -25,7 +26,7 @@
     <!-- Left elements -->
       <!-- Brand -->
       <div class="container border-bottom">
-        <a href = '/'>{%load static %}
+        <a href = '/'>
         <img class="mb-2" src="{% static 'images/cpalogo.jpg'%}"alt="" width="150"
             height="46">
         </a>

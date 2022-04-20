@@ -64,8 +64,9 @@
 }
 </style>
 <head>
-  <link rel="icon" href="#">
-</head>
+  {%load static %}
+  <link href="{% static images/favicon.ico%}" rel="shortcut icon" type="image/x-icon">
+  <link href="{% static images/webclip.png%}" rel="apple-touch-icon"></head>
 
   <div class="d-flex justify-content-center align-items-center">
     <lottie-player src="https://assets9.lottiefiles.com/packages/lf20_ofa3xwo7.json" background="transparent"  speed="1"  style="width: 300px; height: 300px;" loop autoplay></lottie-player>
