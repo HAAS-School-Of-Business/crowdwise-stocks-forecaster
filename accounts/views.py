@@ -8,6 +8,7 @@ from .tokens import account_activation_token
 from .models import Profile
 from question.models import Question
 from django.http import JsonResponse
+from django.http import ht
 
 
 @ login_required
@@ -45,7 +46,7 @@ def favourite_add(request, id):
         post.favourites.remove(request.user)
     else:
         post.favourites.add(request.user)
-    return HttpResponseRedirect(request.META['HTTP_REFERER'])
+    return HttpsResponseRedirect(request.META['HTTP_REFERER'])
 
 
 def avatar(request):
@@ -115,8 +116,7 @@ def accounts_register(request):
             user.set_password(registerForm.cleaned_data['password'])
             user.is_active = True
             user.save()
-
-        return redirect('/accounts/login/')
+        return render(request, 'accounts/profile.html', {'form': registerForm})
             # current_site = get_current_site(request)
             # subject = 'Activate your Account'
             # message = render_to_string('registration/account_activation_email.html', {

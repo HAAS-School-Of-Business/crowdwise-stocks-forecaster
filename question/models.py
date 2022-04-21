@@ -125,6 +125,7 @@ class Question(models.Model):
 
             d = sum(denom_yes)
             n = sum(numerator_yes)
+            print(n)
             yes = (n/d)*100
             no = 100-yes
             self.avg_w_score_no = no
