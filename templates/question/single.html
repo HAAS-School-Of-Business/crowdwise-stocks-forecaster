@@ -61,11 +61,11 @@
     {% else %}
     <form action="" method=GET>
     <div class="card text-center">
-      {% if question.result == None and question.is_live %} 
+      {% if question.is_live %} 
       <div class="card-header">
         Voting Still Live
       </div>
-      {% elif if question.result == None and not question.is_live %}
+      {% elif not question.is_live %}
       <div class="card-header">
         Voting Ended - Results will be posted soon
       </div>
