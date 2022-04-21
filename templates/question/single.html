@@ -61,9 +61,19 @@
     {% else %}
     <form action="" method=GET>
     <div class="card text-center">
+      {% if question.result == None and question.is_live %} 
+      <div class="card-header">
+        Voting Still Live
+      </div>
+      {% elif if question.result == None and not question.is_live}
+      <div class="card-header">
+        Voting Ended - Results will be posted soon
+      </div>
+      {%else %}
       <div class="card-header">
         Vote Completed with Result : {% if question.result%} Yes {%else%} No {%endif%}
       </div>
+      {%endif%}
       <div class="card-body">
         <h5 class="card-title">{{question.question}}</h5>
         <div class="d-flex justify-content-between align-items-center mt-4 px-4">
