@@ -17,7 +17,7 @@
         <p>Welcome to Crowd Predictive Analytics. </p>
         <div class="w-form">
         <form class="account-form p-4 rounded" action="{% url 'login' %}" method="post">
-
+            {% csrf_token %}
           
           <label for="name">{{ form.username.label}}</label>                                
           {{ form.username}}
