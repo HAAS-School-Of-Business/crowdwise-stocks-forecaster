@@ -108,13 +108,18 @@ def vote_single(request, question):
         obj.answer = response
         obj.save()
         request.user.profile.choices.add(obj)
-        return HttpResponseRedirect('/' + q.slug +'?voted=1' )
+        return HttpResponseRedirect('/' + q.slug +'?voted=True' )
     else:
         form = ChoiceForm()
         if 'voted' in request.GET:
             voted = True
         if request.method == "GET" and q in request.user.profile.questions_answered.all():
-            response = Choice.objects.get(user=request.user, question=q.id).answer
+            try:
+                response = Choice.objects.get_queryset().filter(user=request.user).filter(question=q).answer
+            except:
+                print("User's answer didnt register")
+                response = False
     
+
     return render(request, 'question/single.html', {'question': q, 'form':form, 'superuser': superuser,'voted': voted, 'user': request.user, 'response': response})
 
