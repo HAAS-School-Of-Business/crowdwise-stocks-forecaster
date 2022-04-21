@@ -8,79 +8,30 @@
 </script>
 {% endif %}
 
-<style>
-    .login,
-    .image {
-        min-height: 100vh;
-    }
-
-    .bg-image {
-        background-image: url('https://picsum.photos/id/1079/1080');
-        background-size: cover;
-        background-position: center center;
-    }
-
-    .container-fluid {
-        max-width: 100%;
-    }
-
-
-    .hh{
-    justify-content: center;
-    column-count: 2;
-    padding-top: 75px;
-    padding-left: 110px;
-    padding-right: 110px;
-    }
-</style>
-
-
-      <div class="hh">
-                        <div class="account-form">
-                            <form class="account-form p-4 rounded" action="{% url 'login' %}" method="post">
-
-                                {% csrf_token %}
-                                <p class="h4 mb-4 font-weight-bold">Sign In</p>
-
-                                {% if form.errors %}
-                                <div class="alert alert-primary" role="alert">
-                                    Error: Username or Password not correct!
-                                </div>
-                                {% endif %}
-
-                                <label class="small font-weight-bold">{{ form.username.label}}</label>
-                                {{ form.username}}
-
-                                <label class="small font-weight-bold">{{ form.password.label}}</label>
-                                {{ form.password}}
-
-                                <button class="btn btn-dark btn-block py-2 mb-4 mt-5 font-weight-bold" type="submit"
-                                    value="Log-in">Sign
-                                    in</button>
-
-                                <p class="small font-weight-bold text-center pb-3">
-                                    <a href="{% url "accounts:register" %}">New to Crowd Predictive Analytics? Create an account</a>
-                                </p>
-
-                                <hr class="mb-3">
-                                <p class="small text-center">By signing in to your account, you agree to Crowd Predictive Analytics <a
-                                        href="">Terms of
-                                        Service</a> and
-                                    consent to
-                                    our <a href="">Cookie Policy</a> and <a href="">Privacy Policy</a>. This site is not
-                                    protected
-                                    by reCAPTCHA and
-                                    is a demonstration website
-                                    for learning purposes only.
-                                </p>
-                            </form>
-
-
+<header id="hero" class="hero wf-section">
+    <div class="flex-container-3 w-container">
+      <div class="hero-image-mask"><img src="{% static 'images/cubes.gif' %}" alt="" class="hero-image-2"></div>
+      <div class="div-block-7">
+        <h1>Sign In</h1>
+        <p>Welcome to Crowd Predictive Analytics. </p>
+        <div class="w-form">
+          <form id="email-form" 
+          name="email-form" data-name="Email Form" 
+          method="get">
+          
+          <label for="name">{{ form.username.label}}</label>                                
+          {{ form.username}}
+          <label for="email">Password</label><input type="email" class="w-input" maxlength="256" name="email" data-name="Email" placeholder="" id="email" required="">
+          {{ form.password}}
+          <input type="submit" value="Log-In" data-wait="Please wait..." class="w-button">
+        </form>
+          {% if form.errors %}
+          <div class="w-form-fail">
+            <div>Error: Username or Password not correct!</div>
+          </div>
+          {% endif %}
         </div>
-        {% load static %}
-      <div>
-        <img class = "lottie-animation-6" src = "{% static 'images/cubes.gif'%}">
-    </div>
       </div>
-
+    </div>
+  </header>
 {% endblock %}

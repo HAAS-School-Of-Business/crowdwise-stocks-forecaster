@@ -95,17 +95,6 @@ html.w-mod-touch * {
   cursor: pointer;
   border-radius: 0;
 }
-.w-button-center {
-  display: inline-block;
-  padding: 9px 15px;
-  background-color: #3898EC;
-  color: white;
-  border: 0;
-  line-height: inherit;
-  text-decoration: none;
-  cursor: pointer;
-  border-radius: 0;
-}
 input.w-button {
   -webkit-appearance: button;
 }
@@ -1818,4 +1807,10 @@ textarea.w-select {
 }
 .w-condition-invisible {
   display: none !important;
+}
+.wf-layout-layout {
+  display: grid !important;
+}
+.wf-layout-cell {
+  display: flex !important;
 }
