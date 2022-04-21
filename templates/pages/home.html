@@ -3,29 +3,27 @@
 {% load static %}
 
 <section id="feature-section" class="feature-section wf-section">
-  <div class="columns-6 w-row">
-    <div class="column-12 w-col w-col-6">
-      <div class="div-block-5">
-        <h2 class="heading-3">WISDOM OF THE CROWD</h2>
-        <small class="text-muted">Submit your response, gain credibility. Contribute to the Wisdom of the crowd.</small>
-        <div class="div-block">
-          {% load static %}
-          <img class = "lottie-animation-2" src = "{% static 'images/cubes.gif'%}">
-        </div>
-        <div>
-          <h4><em>{{done}} Questions Completed</em></h4>
-          <h4 class="done-text"><em>{{not_done}} Questions In Progress</em></h4>
-        </div>
+  <div class="flex-container w-container">
+    <div>
+      <h2 class="heading-3">WISDOM OF THE CROWD</h2>
+      <small class="text-muted">Submit your response, gain credibility. Contribute to the Wisdom of the crowd.</small>
+      <div class="div-block">
+        {% load static %}
+
+        <img class = "lottie-animation-2" src = "{% static 'images/cubes.gif'%}">
+        <!-- <div class="lottie-animation-2" data-w-id="dc6621e7-46a8-92eb-bf07-cedcba2490d2" data-animation-type="lottie" data-src="{% static 'documents/cubes.json' %}" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="3" data-duration="0"></div> -->
+      </div>
+      <div class="rich-text-block w-richtext">
+        <h4><em>{{done}} Questions Completed</em></h4>
+        <h4 class="done-text"><em>{{not_done}} Questions In Progress</em></h4>
       </div>
     </div>
-
-    <div class="w-col w-col-6">
-      <div>    
-        <img class = "3f175161-ceca-fc15-a489-1f76e54ceb21" src = "{% static 'images/charts.gif'%}">
-    </div>
-    </div>
+    <img class = "3f175161-ceca-fc15-a489-1f76e54ceb21" src = "{% static 'images/charts.gif'%}">
+    <!-- <div data-w-id="3f175161-ceca-fc15-a489-1f76e54ceb21" data-animation-type="lottie" data-src="{% static 'documents/crowdcharts.json' %}" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="12" data-duration="0"></div> -->
   </div>
 </section>
+
+
 
 <div class="section-4 wf-section">
   <div>
