@@ -19,46 +19,49 @@
 </style>
 
 
-<div class="hh">
-                            <form class="account-form p-4 rounded col-lg-10 mx-auto" method="POST">
-                                {% csrf_token %}
-                                <p class="h4 mb-2 font-weight-bold">Create an account</p>
-                                <p class="mb-4">It's free and only takes a minute.</p>
-
-                                {% if form.errors %}
-                                <p>Please correct the following errors:</p>
-                                {% for field in form %}
-                                {% if field.errors %}
-                                <div class="alert alert-primary" role="alert">
-                                    {{ field.label }}: {{ field.errors|striptags }}
-                                </div>
-                                {% endif %}
-                                {% endfor %}
-                                {% endif %}
-
-                                <label class="small font-weight-bold">{{ form.username.label }}<span class="text-muted">
-                                        (Required)</span></label>
-                                {{ form.username }}
-                                <label class="small font-weight-bold">{{ form.email.label}}<span class="text-muted">
-                                        (Required)</span></label>
-                                {{ form.email }}
-                                <label class="small font-weight-bold">{{ form.password.label}}<span class="text-muted">
-                                        (Required)</span></label>
-                                {{ form.password }}
-                                <small class="form-text text-muted mb-4">
-                                    At least 8 characters and 1 digit
-                                </small>
-                                {{ form.password2 }}
-                                <small class="form-text text-muted mb-4">
-                                    Repeat password
-                                </small>
-                                <button class="btn btn-dark btn-block py-2 mb-4 mt-5 font-weight-bold"
-                                    type="Submit" name="'Register">Register</button>
-                            </form>
-
+<header id="hero" class="hero wf-section">
+    <div class="flex-container-3 w-container">
         {% load static %}
-        <div class="">
-            <img class = "lottie-animation-6" src = "{% static 'images/cubes.gif'%}">
+      <div class="hero-image-mask"><img src="{% static 'images/cubes.gif' %}" alt="" class="hero-image-2"></div>
+      <div class="div-block-7">
+        <div class="w-form">
+        <form class="account-form p-4 rounded" method="POST">
+            {% csrf_token %}
+            <p class="h4 mb-2 font-weight-bold">Create an account</p>
+            <p class="mb-4">It's free and only takes a minute.</p>
+
+            {% if form.errors %}
+            <p>Please correct the following errors:</p>
+            {% for field in form %}
+            {% if field.errors %}
+            <div class="alert alert-primary" role="alert">
+                {{ field.label }}: {{ field.errors|striptags }}
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+
+            <label class="small font-weight-bold">{{ form.username.label }}<span class="text-muted">
+                    (Required)</span></label>
+            {{ form.username }}
+            <label class="small font-weight-bold">{{ form.email.label}}<span class="text-muted">
+                    (Required)</span></label>
+            {{ form.email }}
+            <label class="small font-weight-bold">{{ form.password.label}}<span class="text-muted">
+                    (Required)</span></label>
+            {{ form.password }}
+            <small class="form-text text-muted mb-4">
+                At least 8 characters and 1 digit
+            </small>
+            {{ form.password2 }}
+            <small class="form-text text-muted mb-4">
+                Repeat password
+            </small>
+            <button class="btn btn-dark btn-block py-2 mb-4 mt-5 font-weight-bold"
+                type="Submit" name="'Register">Register</button>
+            </form>
         </div>
     </div>
+</div>
+</header>
 {% endblock %}

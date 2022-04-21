@@ -4,6 +4,8 @@
 
 # Mac/OSX
 .DS_Store
+
+#cfg
 .cfg
 
 # Byte-compiled / optimized / DLL files
