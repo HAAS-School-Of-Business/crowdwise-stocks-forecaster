@@ -8,7 +8,7 @@ from .tokens import account_activation_token
 from .models import Profile
 from question.models import Question
 from django.http import JsonResponse
-from django.http import ht
+
 
 
 @ login_required
