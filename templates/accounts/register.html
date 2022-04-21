@@ -19,11 +19,12 @@
 </style>
 
 
-<header id="hero" class="hero wf-section">
-    <div class="flex-container-3 w-container">
-        {% load static %}
-      <div class="hero-image-mask"><img src="{% static 'images/cubes.gif' %}" alt="" class="hero-image-2"></div>
-      <div class="div-block-7">
+<body>
+    <div class="container-2 w-container">
+      <div class="columns-6 w-row">
+        <div class="column-12 w-col w-col-6">
+          <div class="div-block-7">
+        <h1>Register</h1>
         <div class="w-form">
         <form class="account-form p-4 rounded" method="POST">
             {% csrf_token %}
@@ -63,5 +64,10 @@
         </div>
     </div>
 </div>
-</header>
+<div class="column-14 w-col w-col-6">
+    <div class="div-block-8"><img src="{% static 'images/cubes.gif'%}" alt="" class="hero-image-2"></div>
+    </div>
+</div>
+</div>
+</body>
 {% endblock %}
