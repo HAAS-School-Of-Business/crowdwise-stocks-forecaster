@@ -664,8 +664,8 @@
   }
 
   .form-block {
-    min-height: 0px;
-    min-width: 0px;
+    min-height: 150px;
+    min-width: 150px;
   }
 
   .columns-3 {
