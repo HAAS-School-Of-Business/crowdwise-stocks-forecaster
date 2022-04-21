@@ -114,7 +114,7 @@
   <div class="py-5">
     <div class="row">
       {% for q in questions %}
-      {% if  q.result == None %}
+      {% if  q.is_live %}
       <div class="col-md-4">
       <a class="text-dark" href="{{q.get_absolute_url}}">
         <div class="card mb-4 box-shadow">

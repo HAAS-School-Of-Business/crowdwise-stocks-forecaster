@@ -29,7 +29,7 @@
   <div>
     <h1 class="heading-4">How It Works </h1>
   </div>
-  <div class="container-2 w-container">
+  <div class="container-2 w-container box-shadow">
     <div class="columns-5 w-row">
       <div class="column-9 w-col w-col-4">
         <h5 class="heading-9">Submit Your Vote </h5><img src="{% static 'images/questionmark.gif' %}"  alt="" class="image-2">
@@ -49,10 +49,13 @@
 
 
 <div class="container border-top border-bottom ">
+  <div>
+    <h1 class="heading-4">Live Questions </h1>
+  </div>
   <div class="py-5">
     <div class="row">
       {% for q in questions %}
-      {% if  q.result == None %}
+      {% if  q.is_live %}
       <div class="col-md-4">
         {% if request.user.is_authenticated %}
         <a class="text-dark" href="{{q.get_absolute_url}}">
