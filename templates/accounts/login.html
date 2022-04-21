@@ -16,14 +16,14 @@
         <h1>Sign In</h1>
         <p>Welcome to Crowd Predictive Analytics. </p>
         <div class="w-form">
-          <form id="email-form" 
-          name="email-form" data-name="Email Form" 
-          method="get">
+        <form class="account-form p-4 rounded" action="{% url 'login' %}" method="post">
+
           
           <label for="name">{{ form.username.label}}</label>                                
           {{ form.username}}
           <label for="email">Password</label>
           {{ form.password}}
+          <br>
           <input type="submit" value="Log-In" data-wait="Please wait..." class="w-button">
         </form>
           {% if form.errors %}
