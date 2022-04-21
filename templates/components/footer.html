@@ -1,36 +1,46 @@
-            {%load static%}
-            <head>
-                <link href="{% static 'images/favicon.ico'%}" rel="shortcut icon" type="image/x-icon">
-                <link href="{% static 'images/webclip.png'%}" rel="apple-touch-icon">         </head>
-            <div class="container">
-                <footer class="pt-4 my-md-5 pt-md-5 border-top">
+{%load static%}
+<head>
+    <link href="{% static 'images/favicon.ico'%}" rel="shortcut icon" type="image/x-icon">
+    <link href="{% static 'images/webclip.png'%}" rel="apple-touch-icon">         
+</head>
 
-                    <div class="row">
+<style>
+    @media (max-width: 1000px) { 
+      .mb-2 {
+        width: 75px;
+        height: 23;
+      }
+  }
+</style>
+<div class="container">
+    <footer class="pt-4 my-md-5 pt-md-5 border-top">
 
-                        <div class="col-12 col-md">
-                            <a>
-                            <img class="mb-2" src="{% static 'images/cpalogo.jpg'%}"alt="" width="224"
-                                height="69"></a>
-                            <small class="d-block mb-3 text-muted">&copy; 2022</small>
-                        </div>
-                        <div class="col-6 col-md">
-                            <h5>Categories</h5>
-                            <ul class="list-unstyled text-small">
-                                <li><a class="text-muted" href="#">Coming Soon</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-6 col-md">
-                            <h5>Resources</h5>
-                            <!-- <ul class="list-unstyled text-small">
-                                <li><a class="text-muted" href="#">Resource</a></li>
-                            </ul> -->
-                        </div>
-                        <div class="col-6 col-md">
-                            <h5>About</h5>
-                            <ul class="list-unstyled text-small">
-                                <li><a class="text-muted" href="#">100% Privacy</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </footer>
-                <div>
+        <div class="row">
+
+            <div class="col-12 col-md">
+                <a>
+                <img class="mb-2" src="{% static 'images/cpalogo.jpg'%}"alt="" width="224"
+                    height="69"></a>
+                <small class="d-block mb-3 text-muted">&copy; 2022</small>
+            </div>
+            <div class="col-6 col-md">
+                <h5>Categories</h5>
+                <ul class="list-unstyled text-small">
+                    <li><a class="text-muted" href="#">Coming Soon</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-md">
+                <h5>Resources</h5>
+                <!-- <ul class="list-unstyled text-small">
+                    <li><a class="text-muted" href="#">Resource</a></li>
+                </ul> -->
+            </div>
+            <div class="col-6 col-md">
+                <h5>About</h5>
+                <ul class="list-unstyled text-small">
+                    <li><a class="text-muted" href="#">100% Privacy</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <div>
