@@ -51,6 +51,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'crowdpredictiveanalytics.urls'
+os.environ['wsgi.url_scheme'] = 'https'
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
 
 TEMPLATES = [
     {
