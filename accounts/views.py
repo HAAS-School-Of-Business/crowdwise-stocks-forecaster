@@ -8,6 +8,8 @@ from .tokens import account_activation_token
 from .models import Profile
 from question.models import Question
 from django.http import JsonResponse
+from django.contrib.auth import login
+
 
 
 
@@ -111,12 +113,13 @@ def accounts_register(request):
     if request.method == 'POST':
         registerForm = RegistrationForm(request.POST)
         if registerForm.is_valid():
+            print('here')
             user = registerForm.save(commit=False)
             user.email = registerForm.cleaned_data['email']
             user.set_password(registerForm.cleaned_data['password'])
             user.is_active = True
             user.save()
-        return render(request, 'accounts/profile.html', {'form': registerForm})
+            return activate(request,user)
             # current_site = get_current_site(request)
             # subject = 'Activate your Account'
             # message = render_to_string('registration/account_activation_email.html', {
@@ -132,16 +135,11 @@ def accounts_register(request):
     return render(request, 'accounts/register.html', {'form': registerForm})
 
 
-# def activate(request, uidb64, token):
-#     try:
-#         uid = force_bytes(urlsafe_base64_decode(uidb64))
-#         user = User.objects.get(pk=uid)
-#     except(TypeError, ValueError, OverflowError, User.DoesNotExist):
-#         user = None
-#     if user is not None and account_activation_token.check_token(user, token):
-#         user.is_active = True
-#         user.save()
-#         login(request, user)
-#         return redirect('login')
-#     else:
-#         return render(request, 'registration/activation_invalid.html')
+def activate(request, user):
+    try:
+        user.is_active = True
+        user.save()
+        login(request, user)
+        return redirect('login')
+    except:
+        return redirect('login')

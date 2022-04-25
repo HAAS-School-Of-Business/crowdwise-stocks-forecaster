@@ -81,6 +81,7 @@ def vote_single(request, question):
         form_q = QuestionForm()
         return render(request, 'question/single_admin.html', {'question': q, 'superuser': superuser, 'user': request.user})
     elif request.method == "POST" and superuser:
+        print('here')
         if request.POST.get('Yes'):
             q.result = True
             q.save()

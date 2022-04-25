@@ -19,17 +19,15 @@
 </style>
 
 
-<body>
     {% load static %}
 
     <div class="container-2 w-container">
       <div class="columns-6 w-row">
         <div class="column-12 w-col w-col-6">
           <div class="div-block-7">
-        <h1>Register</h1>
         <div class="w-form">
-        <form class="account-form p-4 rounded" method="POST">
-            {% csrf_token %}
+            <form class="account-form p-4 rounded col-lg-10 mx-auto" action="." method="post">
+                {% csrf_token %}
             <p class="h4 mb-2 font-weight-bold">Create an account</p>
             <p class="mb-4">It's free and only takes a minute.</p>
 
@@ -61,7 +59,15 @@
                 Repeat password
             </small>
             <button class="btn btn-dark btn-block py-2 mb-4 mt-5 font-weight-bold"
-                type="Submit" name="'Register">Register</button>
+            type="submit">Register</button>
+
+                <hr class="mb-3">
+                <p class="small text-center">By clicking on register, you agree to Crowd Predictive Analytics's <a href="">Terms
+                        of
+                        Service</a> and
+                    consent to
+                    our <a href="">Cookie Policy</a> and <a href="">Privacy Policy</a>.
+                </p>
             </form>
         </div>
     </div>
@@ -71,5 +77,5 @@
     </div>
 </div>
 </div>
-</body>
+
 {% endblock %}

@@ -16,11 +16,18 @@ def user_directory_path(instance, filename):
 
 
 class Profile(models.Model):
+
+    def validate_image(fieldfile_obj):
+        filesize = fieldfile_obj.file.size
+        megabyte_limit = 5.0
+        if filesize > megabyte_limit*1024*1024:
+            raise ValidationError("Max file size is %sMB" % str(megabyte_limit))
+
     def get_queryset(self):
         return super().get_queryset().filter(self.choices)
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    avatar = models.ImageField(upload_to=user_directory_path, default=None, null=True)
+    avatar = models.ImageField(upload_to=user_directory_path, default='static/images/robo.gif', validators=[validate_image], null=True)
     bio = models.TextField(max_length=500, blank=True)
     questions_answered = models.ManyToManyField(Question, null=True)
     choices = models.ManyToManyField(Choice, null=True)

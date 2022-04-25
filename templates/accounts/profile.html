@@ -67,9 +67,9 @@
 
   <div class="d-flex justify-content-center align-items-center">
     <lottie-player src="https://assets9.lottiefiles.com/packages/lf20_ofa3xwo7.json" background="transparent"  speed="1"  style="width: 300px; height: 300px;" loop autoplay></lottie-player>
-
         <div class="mt-5 text-center">
-            <h4 class="mb-0">@{{request.user.username}}</h4> <span class="text-muted d-block mb-2"></span> <button class="btn btn-primary btn-sm follow">Follow</button>
+            <h4 class="mb-0">@{{request.user.username}}</h4> <span class="text-muted d-block mb-2"></span> 
+            <button class="btn btn-primary btn-sm follow" id="profileButton" src="{% url "accounts:edit" %}">Update Profile</button>
             <div class="d-flex justify-content-between align-items-center mt-4 px-4">
                 <div class="stats">
                     <h9 class="mb-0">Questions Answered</h9><br> <span>{{user.profile.questions_answered_count}}</span>
@@ -79,8 +79,7 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
+      </div>
 
   <!-- <div class="w-row">
     <div class="column-4 w-col w-col-6">    
@@ -170,7 +169,12 @@
   </div>
 </div>
 
-
+<script>
+  var button = document.getElementById('profileButton');
+  button.onclick = function() {
+  location.assign('{% url "accounts:edit" %}');
+}
+</script>
 
 
 {% endblock %}
