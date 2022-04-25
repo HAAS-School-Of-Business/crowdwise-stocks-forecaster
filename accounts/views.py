@@ -106,18 +106,19 @@ def delete_user(request):
     return render(request, 'accounts/delete.html')
 
 
+from django.template import RequestContext
 
 def accounts_register(request):
     if request.method == 'POST':
         registerForm = RegistrationForm(request.POST)
         if registerForm.is_valid():
-            print('here')
+            request_context = RequestContext(request)
             user = registerForm.save(commit=False)
             user.email = registerForm.cleaned_data['email']
             user.set_password(registerForm.cleaned_data['password'])
             user.is_active = True
             user.save()
-            return activate(request,user)
+            return activate(request_context,user)
             # current_site = get_current_site(request)
             # subject = 'Activate your Account'
             # message = render_to_string('registration/account_activation_email.html', {

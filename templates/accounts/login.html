@@ -17,7 +17,8 @@
           <div class="div-block-7">
         <h1>Sign In</h1>
         <div class="w-form">
-        <form class="account-form p-4 rounded" action="{% url 'login' %}" method="post">          
+        <form class="account-form p-4 rounded" action="{% url 'login' %}" method="post">     
+          {% csrf_token %}     
           <label for="name">{{ form.username.label}}</label>                                
           {{ form.username}}
           <label for="email">Password</label>

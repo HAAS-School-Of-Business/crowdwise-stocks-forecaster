@@ -17,7 +17,6 @@ def user_directory_path(instance, filename):
 
 
 @csrf_exempt
-
 class PwdResetConfirmForm(SetPasswordForm):
     new_password1 = forms.CharField(
         label='New password', widget=forms.PasswordInput(
