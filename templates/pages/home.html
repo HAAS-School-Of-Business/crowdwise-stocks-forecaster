@@ -13,29 +13,27 @@
   padding-top: 40px;
 }
 </style>
-
-<section id="feature-section" class="feature-section wf-section">
-  <div class="container-2 w-container box-shadow">
+<body class="body">
+  <section id="feature-section" class="feature-section wf-section">
+    <div class="container-2 w-container">
       <div class="columns-6 w-row">
         <div class="column-12 w-col w-col-6">
-        <h2 class="heading-3">WISDOM OF THE CROWD</h2>
-      <p class="p-t">Submit your response, gain credibility. Contribute to the Wisdom of the crowd.</p>
-      <div class="div-block">
-        {% load static %}
-        <img class = "lottie-animation-2" src = "{% static 'images/cubes.gif'%}">
-      </div>
-      <div class="rich-text-block w-richtext">
-        <h4><em>{{done}} Questions Completed</em></h4>
-        <h4 class="done-text"><em>{{not_done}} Questions In Progress</em></h4>
+          <div class="div-block-5">
+            <h2 class="heading-3">WISDOM OF THE CROWD</h2>
+            <div class="div-block">
+              <div><img src="{% static 'images/cubes.gif' %}"  width="150" height="150" alt=""></div>
+            </div>
+            <div>
+        <p class="paragraph-5">{{done}} Questions Completed</p>
+        <p class="paragraph-5"> {{not_done}} Questions In Progress</p>
       </div>
     </div>
-    <div class="w-col w-col-6">
-        <img class = "3f175161-ceca-fc15-a489-1f76e54ceb21" src = "{% static 'images/charts.gif'%}">
-    </div>
+  </div>
+  <div class="w-col w-col-6">
+    <div><img src="{% static 'images/charts.gif' %}" width="300" height="300" alt="" class="image-5"></div>
   </div>
 </div>
 </div>
-
 </section>
 
 
