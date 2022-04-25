@@ -22,9 +22,9 @@ DEBUG=True
 
 # ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost, crowdpredictiveanalytics.com").split(",")
 SECRET_KEY= 'y2j!+h!gm$e$2l+t=6onxpie)!ppr866f^6g7wrq+k@^^ntt_c'
-# ALLOWED_HOSTS=['crowdpredictiveanalytics.com/','crowdpredictiveanalytics.com',"www.crowdpredictiveanalytics.com/","www.crowdpredictiveanalytics.com", "*","www.my-app-pl8tf.ondigitalocean.app/", "my-app-pl8tf.ondigitalocean.app/"]
-# DJANGO_ALLOWED_HOSTS = ['crowdpredictiveanalytics.com/','crowdpredictiveanalytics.com',"www.crowdpredictiveanalytics.com/","www.crowdpredictiveanalytics.com", "*","www.my-app-pl8tf.ondigitalocean.app/", "my-app-pl8tf.ondigitalocean.app/"]
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS=['crowdpredictiveanalytics.com/','crowdpredictiveanalytics.com',"www.crowdpredictiveanalytics.com/","www.crowdpredictiveanalytics.com", "*","www.my-app-pl8tf.ondigitalocean.app/", "my-app-pl8tf.ondigitalocean.app/"]
+DJANGO_ALLOWED_HOSTS = ['crowdpredictiveanalytics.com/','crowdpredictiveanalytics.com',"www.crowdpredictiveanalytics.com/","www.crowdpredictiveanalytics.com", "*","www.my-app-pl8tf.ondigitalocean.app/", "my-app-pl8tf.ondigitalocean.app/"]
+# ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -44,7 +44,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -79,25 +79,25 @@ WSGI_APPLICATION = 'crowdpredictiveanalytics.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': str(BASE_DIR / 'db.sqlite3'),
-    }
-    #     'default': {
-
-    #     'ENGINE': 'django.db.backends.postgresql',
-
-    #     'NAME': 'defaultdb',
-
-    #     'USER': 'doadmin',
-
-    #     'PASSWORD': 'AVNS_w9g61bUl4uRTNYw',
-
-    #     'HOST': 'db-postgresql-sfo2-63904-do-user-11397652-0.b.db.ondigitalocean.com',
-
-    #     'PORT': '25060',
-
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': str(BASE_DIR / 'db.sqlite3'),
     # }
+        'default': {
+
+        'ENGINE': 'django.db.backends.postgresql',
+
+        'NAME': 'defaultdb',
+
+        'USER': 'doadmin',
+
+        'PASSWORD': 'AVNS_w9g61bUl4uRTNYw',
+
+        'HOST': 'db-postgresql-sfo2-63904-do-user-11397652-0.b.db.ondigitalocean.com',
+
+        'PORT': '25060',
+
+    }
 }
 
 POSTGRES_DB = os.environ.get("POSTGRES_DB")
