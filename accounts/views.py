@@ -107,8 +107,6 @@ def delete_user(request):
 
 
 
-
-
 def accounts_register(request):
     if request.method == 'POST':
         registerForm = RegistrationForm(request.POST)

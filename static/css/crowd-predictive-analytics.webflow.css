@@ -525,7 +525,6 @@
 
 .column-6 {
   text-align: left;
-  padding-top: 100px;
 }
 
 .column-7 {
@@ -637,7 +636,6 @@
   -ms-flex-pack: center;
   justify-content: center;
   text-align: center;
-  padding-top: 100px;
 }
 
 @media screen and (max-width: 991px) {
@@ -770,7 +768,6 @@
 
   .container-2 {
     border-right: 1px none #000;
-    padding-top: 30px;
   }
 
   .column-11 {

@@ -7,6 +7,8 @@ from accounts.models import Profile
 
 # https://docs.djangoproject.com/en/3.0/topics/auth/default/
 # https://docs.djangoproject.com/en/3.0/topics/forms/
+from django.views.decorators.csrf import csrf_exempt
+
 
 @csrf_exempt
 
@@ -24,7 +26,6 @@ class PwdResetConfirmForm(SetPasswordForm):
         label='Repeat password', widget=forms.PasswordInput(
             attrs={'class': 'form-control mb-3', 'placeholder': 'New Password', 'id': 'form-new-pass2'}))
 
-from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
 class UserLoginForm(AuthenticationForm):
