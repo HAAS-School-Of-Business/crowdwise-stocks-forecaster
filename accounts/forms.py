@@ -24,7 +24,7 @@ class PwdResetConfirmForm(SetPasswordForm):
 
 from django.views.decorators.csrf import csrf_exempt
 
-@csrf_exempt
+
 class UserLoginForm(AuthenticationForm):
 
     username = forms.CharField(widget=forms.TextInput(
