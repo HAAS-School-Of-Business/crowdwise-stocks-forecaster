@@ -8,11 +8,13 @@ from accounts.models import Profile
 # https://docs.djangoproject.com/en/3.0/topics/auth/default/
 # https://docs.djangoproject.com/en/3.0/topics/forms/
 
+@csrf_exempt
 
 def user_directory_path(instance, filename):
     return 'users/avatars/{0}/{1}'.format(instance.user.id, filename)
 
 
+@csrf_exempt
 
 class PwdResetConfirmForm(SetPasswordForm):
     new_password1 = forms.CharField(
@@ -24,7 +26,7 @@ class PwdResetConfirmForm(SetPasswordForm):
 
 from django.views.decorators.csrf import csrf_exempt
 
-
+@csrf_exempt
 class UserLoginForm(AuthenticationForm):
 
     username = forms.CharField(widget=forms.TextInput(
@@ -37,6 +39,7 @@ class UserLoginForm(AuthenticationForm):
         }
     ))
 
+@csrf_exempt
 
 class PwdChangeForm(PasswordChangeForm):
 
@@ -50,6 +53,7 @@ class PwdChangeForm(PasswordChangeForm):
         label='Repeat password', widget=forms.PasswordInput(
             attrs={'class': 'form-control mb-3', 'placeholder': 'New Password', 'id': 'form-new-pass2'}))
 
+@csrf_exempt
 
 class PwdResetForm(PasswordResetForm):
 
@@ -64,7 +68,7 @@ class PwdResetForm(PasswordResetForm):
                 'Unfortunatley we can not find that email address')
         return email
 
-
+@csrf_exempt
 class RegistrationForm(forms.ModelForm):
 
     username = forms.CharField(
@@ -110,7 +114,7 @@ class RegistrationForm(forms.ModelForm):
         self.fields['password2'].widget.attrs.update(
             {'class': 'form-control', 'placeholder': 'Repeat Password'})
 
-
+@csrf_exempt
 class UserEditForm(forms.ModelForm):
 
     first_name = forms.CharField(
@@ -134,7 +138,7 @@ class UserEditForm(forms.ModelForm):
         self.fields['last_name'].required = False
         self.fields['email'].required = False
 
-
+@csrf_exempt
 class UserProfileForm(forms.ModelForm):
 
     class Meta:
