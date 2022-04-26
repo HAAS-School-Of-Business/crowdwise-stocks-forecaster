@@ -18,13 +18,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG=True
+DEBUG=False
 
 # ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost, crowdpredictiveanalytics.com").split(",")
 SECRET_KEY= 'y2j!+h!gm$e$2l+t=6onxpie)!ppr866f^6g7wrq+k@^^ntt_c'
-ALLOWED_HOSTS=['crowdpredictiveanalytics.com/','crowdpredictiveanalytics.com',"www.crowdpredictiveanalytics.com/","www.crowdpredictiveanalytics.com", "*","www.my-app-pl8tf.ondigitalocean.app/", "my-app-pl8tf.ondigitalocean.app/"]
-DJANGO_ALLOWED_HOSTS = ['crowdpredictiveanalytics.com/','crowdpredictiveanalytics.com',"www.crowdpredictiveanalytics.com/","www.crowdpredictiveanalytics.com", "*","www.my-app-pl8tf.ondigitalocean.app/", "my-app-pl8tf.ondigitalocean.app/"]
-# ALLOWED_HOSTS = ['137.184.198.193']
+# ALLOWED_HOSTS=['crowdpredictiveanalytics.com/','crowdpredictiveanalytics.com',"www.crowdpredictiveanalytics.com/","www.crowdpredictiveanalytics.com", "*","www.my-app-pl8tf.ondigitalocean.app/", "my-app-pl8tf.ondigitalocean.app/"]
+# DJANGO_ALLOWED_HOSTS = ['crowdpredictiveanalytics.com/','crowdpredictiveanalytics.com',"www.crowdpredictiveanalytics.com/","www.crowdpredictiveanalytics.com", "*","www.my-app-pl8tf.ondigitalocean.app/", "my-app-pl8tf.ondigitalocean.app/"]
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -79,52 +79,52 @@ WSGI_APPLICATION = 'crowdpredictiveanalytics.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': str(BASE_DIR / 'db.sqlite3'),
-    # }
-        'default': {
-
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-
-        'NAME': 'defaultdb',
-
-        'USER': 'doadmin',
-
-        'PASSWORD': 'AVNS_w9g61bUl4uRTNYw',
-
-        'HOST': 'db-postgresql-sfo2-63904-do-user-11397652-0.b.db.ondigitalocean.com',
-
-        'PORT': '25060',
-
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': str(BASE_DIR / 'db.sqlite3'),
     }
+    #     'default': {
+
+    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+
+    #     'NAME': 'defaultdb',
+
+    #     'USER': 'doadmin',
+
+    #     'PASSWORD': 'AVNS_w9g61bUl4uRTNYw',
+
+    #     'HOST': 'db-postgresql-sfo2-63904-do-user-11397652-0.b.db.ondigitalocean.com',
+
+    #     'PORT': '25060',
+
+    # }
 }
 
-POSTGRES_DB = os.environ.get("POSTGRES_DB")
-POSTGRES_PASSWORD = os.environ.get("POSTGRES_PASSWORD")
-POSTGRES_USER = os.environ.get("POSTGRES_USER")
-POSTGRES_HOST = os.environ.get("POSTGRES_HOST")
-POSTGRES_PORT = os.environ.get("POSTGRES_PORT")
+# POSTGRES_DB = os.environ.get("POSTGRES_DB")
+# POSTGRES_PASSWORD = os.environ.get("POSTGRES_PASSWORD")
+# POSTGRES_USER = os.environ.get("POSTGRES_USER")
+# POSTGRES_HOST = os.environ.get("POSTGRES_HOST")
+# POSTGRES_PORT = os.environ.get("POSTGRES_PORT")
 
-POSTGRES_READY = (
-    POSTGRES_DB is not None
-    and POSTGRES_PASSWORD is not None
-    and POSTGRES_USER is not None
-    and POSTGRES_HOST is not None
-    and POSTGRES_PORT is not None
-)
+# POSTGRES_READY = (
+#     POSTGRES_DB is not None
+#     and POSTGRES_PASSWORD is not None
+#     and POSTGRES_USER is not None
+#     and POSTGRES_HOST is not None
+#     and POSTGRES_PORT is not None
+# )
 
-if POSTGRES_READY:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql",
-            "NAME": POSTGRES_DB,
-            "USER": POSTGRES_USER,
-            "PASSWORD": POSTGRES_PASSWORD,
-            "HOST": POSTGRES_HOST,
-            "PORT": POSTGRES_PORT,
-        }
-    }
+# if POSTGRES_READY:
+#     DATABASES = {
+#         "default": {
+#             "ENGINE": "django.db.backends.postgresql",
+#             "NAME": POSTGRES_DB,
+#             "USER": POSTGRES_USER,
+#             "PASSWORD": POSTGRES_PASSWORD,
+#             "HOST": POSTGRES_HOST,
+#             "PORT": POSTGRES_PORT,
+#         }
+#     }
 
 
 # Password validation

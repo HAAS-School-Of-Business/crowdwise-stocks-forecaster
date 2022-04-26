@@ -114,7 +114,10 @@ def vote_single(request, question):
             voted = True
         if request.method == "GET" and q in request.user.profile.questions_answered.all():
             try:
-                response = Choice.objects.get_queryset().filter(user=request.user).filter(question=q).answer
+                choices = Choice.objects.get_queryset().filter(user=request.user)
+                for c in choices:
+                   if c.question == c:
+                       response = c.answer
             except:
                 print("User's answer didnt register")
                 response = False
