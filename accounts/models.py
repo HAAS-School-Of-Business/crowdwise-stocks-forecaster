@@ -26,8 +26,8 @@ class Profile(models.Model):
     def get_queryset(self):
         return super().get_queryset().filter(self.choices)
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    avatar = models.ImageField(upload_to=user_directory_path, default='static/images/robo.gif', validators=[validate_image], null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True)
+    avatar = models.ImageField(upload_to=user_directory_path, blank=True, validators=[validate_image], null=True)
     bio = models.TextField(max_length=500, blank=True)
     GENDER =  (
             ('male','MALE'),
@@ -38,8 +38,8 @@ class Profile(models.Model):
         )
     # gender = models.CharField(max_length=11, choices=GENDER, default='no-response', null=True, blank=True)
     # age = models.CharField(max_length=3, null=True, blank=True)
-    questions_answered = models.ManyToManyField(Question, null=True)
-    choices = models.ManyToManyField(Choice, null=True)
+    questions_answered = models.ManyToManyField(Question, null=True, blank=True)
+    choices = models.ManyToManyField(Choice, null=True, blank=True)
     questions_answered_count = models.IntegerField(default=0, blank=True)
     correct_answers = models.IntegerField(default=0, blank=True)
     BOOL_CHOICES = ((True, 'Yes'), (False, 'No'))

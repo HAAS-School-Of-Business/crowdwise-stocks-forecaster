@@ -24,11 +24,12 @@
 
         <a href="{% url "accounts:profile"%}" class="btn btn-primary">Dashboard</a>
       </div>
-      {% if response%}
+      {% if response == True %}
       <div class="card-footer text-muted">
+        coming as true
        Your Vote:   Yes     
       </div>
-       {%elif not response == None %}
+       {%elif response == False %}
        <div class="card-footer text-muted">
        Your Vote = No
        </div>
@@ -89,11 +90,11 @@
 
         <a href="{% url "accounts:profile"%}" class="btn btn-primary">Dashboard</a>
       </div>
-      {% if response%}
+      {% if response == True %}
       <div class="card-footer text-muted">
        Your Vote:   Yes     
       </div>
-       {%elif not response == None %}
+       {%elif response == False %}
        <div class="card-footer text-muted">
        Your Vote = No
        </div>

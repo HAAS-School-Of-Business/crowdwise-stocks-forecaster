@@ -93,10 +93,12 @@ def vote_single(request, question):
         return redirect('/')
     elif request.method == "POST" and not superuser and not voted:
         form = ChoiceForm()
+        print("why are here ")
         if request.POST.get('Yes') and not voted:
             response=True
             q.addYesVote()
         elif request.POST.get('No') and not voted:
+
             response=False
             q.addNoVote()
         join_q(request, question, response)
@@ -112,16 +114,21 @@ def vote_single(request, question):
         form = ChoiceForm()
         if 'voted' in request.GET:
             voted = True
-        if request.method == "GET" and q in request.user.profile.questions_answered.all():
             try:
-                choices = Choice.objects.get_queryset().filter(user=request.user)
+                choices = Choice.objects.get_queryset().all()
                 for c in choices:
-                   if c.question == c:
-                       response = c.answer
+                    if c.user == request.user:
+                        print(c.answer)
+                        if c.answer:
+                            response=True
+                        else:
+                            response=False
+
+                    else:
+                        response=None
             except:
                 print("User's answer didnt register")
                 response = False
     
-
     return render(request, 'question/single.html', {'question': q, 'form':form, 'superuser': superuser,'voted': voted, 'user': request.user, 'response': response})
 

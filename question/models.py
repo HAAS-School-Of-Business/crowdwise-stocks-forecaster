@@ -145,7 +145,6 @@ class Choice(models.Model):
             return super().get_queryset()
 
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING, default=None)
-
     BOOL_CHOICES = ((True, 'Yes'), (False, 'No'))
     user_responded = models.BooleanField(choices=BOOL_CHOICES, default=None)
     question = models.ForeignKey(Question, on_delete=models.PROTECT, null=True)
