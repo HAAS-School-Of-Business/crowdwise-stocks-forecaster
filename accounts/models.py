@@ -36,14 +36,14 @@ class Profile(models.Model):
             ('other','OTHER'),
             ('no-response', 'NO-RESPONSE')
         )
-    gender = models.CharField(max_length=11, choices=GENDER, default='no-response', null=True, blank=True)
-    age = models.CharField(max_length=3, null=True, blank=True)
+    # gender = models.CharField(max_length=11, choices=GENDER, default='no-response', null=True, blank=True)
+    # age = models.CharField(max_length=3, null=True, blank=True)
     questions_answered = models.ManyToManyField(Question, null=True)
     choices = models.ManyToManyField(Choice, null=True)
     questions_answered_count = models.IntegerField(default=0, blank=True)
     correct_answers = models.IntegerField(default=0, blank=True)
     BOOL_CHOICES = ((True, 'Yes'), (False, 'No'))
-    active= models.BooleanField(choices=BOOL_CHOICES,default=False, null=True,blank=True)
+    # active= models.BooleanField(choices=BOOL_CHOICES,default=False, null=True,blank=True)
 
     @property
     def accuracy(self):        

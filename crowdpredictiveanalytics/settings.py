@@ -24,7 +24,7 @@ DEBUG=True
 SECRET_KEY= 'y2j!+h!gm$e$2l+t=6onxpie)!ppr866f^6g7wrq+k@^^ntt_c'
 ALLOWED_HOSTS=['crowdpredictiveanalytics.com/','crowdpredictiveanalytics.com',"www.crowdpredictiveanalytics.com/","www.crowdpredictiveanalytics.com", "*","www.my-app-pl8tf.ondigitalocean.app/", "my-app-pl8tf.ondigitalocean.app/"]
 DJANGO_ALLOWED_HOSTS = ['crowdpredictiveanalytics.com/','crowdpredictiveanalytics.com',"www.crowdpredictiveanalytics.com/","www.crowdpredictiveanalytics.com", "*","www.my-app-pl8tf.ondigitalocean.app/", "my-app-pl8tf.ondigitalocean.app/"]
-# ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ['137.184.198.193']
 
 # Application definition
 
@@ -85,7 +85,7 @@ DATABASES = {
     # }
         'default': {
 
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
 
         'NAME': 'defaultdb',
 
