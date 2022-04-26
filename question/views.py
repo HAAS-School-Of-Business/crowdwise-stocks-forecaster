@@ -86,12 +86,10 @@ def vote_single(request, question):
             q.result = True
             q.save()
             resolve(request, question, True)
-            print('resole')
         elif request.POST.get('No'):
             q.result = False
             q.save()
             resolve(request, question, False)
-            print('resoleFalse')
         return redirect('/')
     elif request.method == "POST" and not superuser and not voted:
         form = ChoiceForm()
