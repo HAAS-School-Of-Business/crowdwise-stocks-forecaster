@@ -68,10 +68,13 @@ def avatar(request):
 @login_required
 def profile(request):
     all_questions = Question.newmanager.all()
-
+    if request.user.profile.questions_answered_count > 10:
+        print("here")
+        request.user.profile.activate()
+        request.user.save()
     return render(request,
                   'accounts/profile.html',
-                  {'questions': all_questions}, status=200)
+                  {'questions': all_questions, "active": request.user.profile.active}, status=200)
 
 
 @login_required

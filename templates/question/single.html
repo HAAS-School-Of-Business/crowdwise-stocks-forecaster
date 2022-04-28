@@ -13,23 +13,25 @@
         <h5 class="card-title">{{question.question}}</h5>
         <div class="d-flex justify-content-between align-items-center mt-4 px-4">
           <div class="stats">
+                      {%if active%}
+
             <h9 class="mb-0">Crowd's Equal Weighted Vote</h9><br> <span>{{question.getScores.5}} Total Votes <br></span><span>{{question.getScores.1}} % Yes</span>
             <br> <span>{{question.getScores.2}} % No</span>
-
           </div>
           <div class="stats">
             <h9 class="mb-0">Crowd's Accuracy Weighted Vote</h9><br> <span>{% if question.getScores.3 != 'None' %} {{question.getScores.4}} % Yes<br> <span>{{question.getScores.4}} % No</span>{%else%} No Weights Yet {%endif%}</span>
+            {%endif%}
+
           </div>
         </div>
 
         <a href="{% url "accounts:profile"%}" class="btn btn-primary">Dashboard</a>
       </div>
-      {% if response == True %}
+      {% if response %}
       <div class="card-footer text-muted">
-        coming as true
        Your Vote:   Yes     
       </div>
-       {%elif response == False %}
+       {%elif not response  %}
        <div class="card-footer text-muted">
        Your Vote = No
        </div>
@@ -79,22 +81,28 @@
         <h5 class="card-title">{{question.question}}</h5>
         <div class="d-flex justify-content-between align-items-center mt-4 px-4">
           <div class="stats">
+            {% if active%}
             <h9 class="mb-0">Crowd's Equal Weighted Vote</h9><br> <span>{{question.getScores.5}} Total Votes <br></span><span>{{question.getScores.1}} % Yes</span>
             <br> <span>{{question.getScores.2}} % No</span>
 
           </div>
           <div class="stats">
+           
             <h9 class="mb-0">Crowd's Accuracy Weighted Vote</h9><br> <span>{% if question.getScores.3 != 'None' %} {{question.getScores.3}} % Yes<br> <span>{{question.getScores.4}} % No</span>{%else%} No Weights Yet {%endif%}</span>
+            {%endif%}
+
           </div>
+
         </div>
 
         <a href="{% url "accounts:profile"%}" class="btn btn-primary">Dashboard</a>
       </div>
-      {% if response == True %}
+
+      {% if response %}
       <div class="card-footer text-muted">
        Your Vote:   Yes     
       </div>
-       {%elif response == False %}
+       {%elif not response %}
        <div class="card-footer text-muted">
        Your Vote = No
        </div>

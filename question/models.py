@@ -19,6 +19,8 @@ from datetime import datetime
 def join_q(request, question, resp):
     q = Question.objects.get(slug=question)
     request.user.profile.questions_answered.add(q)
+    request.user.profile.questions_answered_count = request.user.profile.questions_answered_count +1
+    request.user.profile.save()
     q.voters.add(request.user)
     q.save()
     return
@@ -144,7 +146,7 @@ class Choice(models.Model):
         def get_queryset(self, ):
             return super().get_queryset()
 
-    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, default=None)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
     BOOL_CHOICES = ((True, 'Yes'), (False, 'No'))
     user_responded = models.BooleanField(choices=BOOL_CHOICES, default=None)
     question = models.ForeignKey(Question, on_delete=models.PROTECT, null=True)

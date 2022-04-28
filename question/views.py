@@ -8,6 +8,7 @@ from django.conf import settings
 from django.contrib.auth.decorators import login_required
 
 from django.shortcuts import render, get_object_or_404, HttpResponseRedirect
+from accounts.views import activate
 
 # from django.utils.http import is_safe_url
 
@@ -36,10 +37,12 @@ def home_view(request, *args, **kwargs):
             choices = user.profile.choices.all()
             return render(request, 'pages/home.html', {'questions': all_questions,'done':done, 'not_done':not_done, 'user':user, 'profile':profile, 'choices': choices}, status=200)
     else:
+
         return render(request, 'pages/home.html', {'questions': all_questions, 'done':done, 'not_done':not_done, 'user':None, 'profile':None}, status=200)
 
 @ login_required
 def vote_submit_view(request, *args, **kwargs):
+    active=False
     form = ChoiceForm(request.POST or None)
     next_url = request.POST.get('next') or None
     if form.is_valid():
@@ -50,7 +53,10 @@ def vote_submit_view(request, *args, **kwargs):
         if next_url != None :
             return redirect(next_url)
         form=ChoiceForm()
-    return render(request, 'question/single.html', context={"form": form}, status=200)
+        if request.user.profile.questions_answered > 10:
+            active=True
+            return render(request, 'question/single.html', context={"form": form, "active":active}, status=200)
+    return render(request, 'question/single.html', context={"form": form, "active": active}, status=200)
 
 
 def question_list_view(request, *args, **kwargs):
@@ -129,6 +135,5 @@ def vote_single(request, question):
             except:
                 print("User's answer didnt register")
                 response = False
-    
-    return render(request, 'question/single.html', {'question': q, 'form':form, 'superuser': superuser,'voted': voted, 'user': request.user, 'response': response})
+    return render(request, 'question/single.html', {'question': q, 'form':form, 'superuser': superuser,'voted': voted, 'user': request.user, 'response': response, "active": request.user.profile.active})
 
