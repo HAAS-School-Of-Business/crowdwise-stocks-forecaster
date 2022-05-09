@@ -30,7 +30,6 @@ def home_view(request, *args, **kwargs):
     length = len(all_questions)
     not_done = len(Question.newmanager.all().filter(result=None))
     done = length-not_done
-
     if not request.user.is_anonymous:
         if request.method == "GET":
             profile = request.user.profile
@@ -38,7 +37,6 @@ def home_view(request, *args, **kwargs):
             choices = user.profile.choices.all()
             return render(request, 'pages/home.html', {'questions': all_questions,'done':done, 'not_done':not_done, 'user':user, 'profile':profile, 'choices': choices}, status=200)
     else:
-
         return render(request, 'pages/home.html', {'questions': all_questions, 'done':done, 'not_done':not_done, 'user':None, 'profile':None}, status=200)
 
 @ login_required
@@ -122,9 +120,10 @@ def vote_single(request, question):
         if 'voted' in request.GET:
             voted = True
             try:
-                choices = Choice.objects.get_queryset().all()
+                choices = request.user.profile.choices.queryset.all()
                 for c in choices:
                     if c.user == request.user:
+                        print("answwer")
                         print(c.answer)
                         if c.answer:
                             response=True
@@ -136,5 +135,5 @@ def vote_single(request, question):
             except:
                 print("User's answer didnt register")
                 response = False
-    return render(request, 'question/single.html', {'question': q, 'form':form, 'superuser': superuser,'voted': voted, 'user': request.user, 'response': response, "active": request.user.profile.active})
+    return render(request, 'question/single.html', {'question': q, 'form':form, 'superuser': superuser,'voted': voted, 'user': request.user, 'answer': response, "active": request.user.profile.active})
 

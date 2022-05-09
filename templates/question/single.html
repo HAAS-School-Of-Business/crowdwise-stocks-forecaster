@@ -5,7 +5,6 @@
   <center>
     {% if voted %}
     <div class="card text-center">
-      {% csrf_token %}
       <div class="card-header">
         Your Vote Was Sucessfully Submitted 
       </div>
@@ -13,7 +12,7 @@
         <h5 class="card-title">{{question.question}}</h5>
         <div class="d-flex justify-content-between align-items-center mt-4 px-4">
           <div class="stats">
-                      {%if active%}
+              {%if active%}
 
             <h9 class="mb-0">Crowd's Equal Weighted Vote</h9><br> <span>{{question.getScores.5}} Total Votes <br></span><span>{{question.getScores.1}} % Yes</span>
             <br> <span>{{question.getScores.2}} % No</span>
@@ -27,11 +26,11 @@
 
         <a href="{% url "accounts:profile"%}" class="btn btn-primary">Dashboard</a>
       </div>
-      {% if response %}
+      {% if answer %}
       <div class="card-footer text-muted">
-       Your Vote:   Yes     
+       Your Vote =  Yes     
       </div>
-       {%elif not response  %}
+       {%elif not answer  %}
        <div class="card-footer text-muted">
        Your Vote = No
        </div>
@@ -39,7 +38,6 @@
     </div>
     {% elif user not in question.voters.all and question.result == None and question.is_live %}
     <form action="" method=POST>
-      {% csrf_token %}
       <div class="card text-center">
           <div class="card-header">
             Voting Ends {{question.dateEnds}}
@@ -97,20 +95,6 @@
 
         <a href="{% url "accounts:profile"%}" class="btn btn-primary">Dashboard</a>
       </div>
-
-      {% if response %}
-      <div class="card-footer text-muted">
-       Your Vote:   Yes     
-      </div>
-       {%elif not response %}
-       <div class="card-footer text-muted">
-       Your Vote = No
-       </div>
-       {%else%}
-       <div class="card-footer text-muted">
-        You Did Not Vote 
-        </div>
-       {%endif%}
     </div>
 
     </form>
