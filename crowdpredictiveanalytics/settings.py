@@ -185,11 +185,6 @@ MEDIA_ROOT = BASE_DIR / "staticfiles-cdn" / "uploads"
 
 from .cdn.conf import * # noqa
 
-#Where the files are stored
-#ttps://crowd-predictive-analytics.nyc3.digitaloceanspaces.com
-#Test
-#AWS_KEY Y6VDTVH6EIGAM3YQP3XX
-#AWS_PASS = h8/UYJmd3gB9pmOTecdf5OFIoyCLtzdZbpjQieS/Bq0
 
 LOGIN_REDIRECT_URL = 'accounts:profile'
 LOGIN_URL = 'login'

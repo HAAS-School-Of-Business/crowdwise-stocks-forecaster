@@ -1,4 +1,5 @@
 from pstats import Stats
+import re
 from secrets import choice
 from unittest import result
 from django.http import Http404, HttpResponse, JsonResponse, HttpResponseRedirect
@@ -21,7 +22,9 @@ ALLOWED_HOSTS = settings.ALLOWED_HOSTS
 import os
 import json
 
-
+def road_view(request, *args, **kwargs):
+    print("here")
+    return render(request, 'pages/about.html', {'request': request}, status=200)
 
 
 def home_view(request, *args, **kwargs):
@@ -35,10 +38,10 @@ def home_view(request, *args, **kwargs):
             profile = request.user.profile
             user = request.user
             choices = user.profile.choices.all()
-            return render(request, 'pages/home.html', {'questions': all_questions,'done':done, 'not_done':not_done, 'user':user, 'profile':profile, 'choices': choices}, status=200)
+            return render(request, 'pages/about.html', {'questions': all_questions,'done':done, 'not_done':not_done, 'user':user, 'profile':profile, 'choices': choices}, status=200)
     else:
 
-        return render(request, 'pages/home.html', {'questions': all_questions, 'done':done, 'not_done':not_done, 'user':None, 'profile':None}, status=200)
+        return render(request, 'pages/about.html', {'questions': all_questions, 'done':done, 'not_done':not_done, 'user':None, 'profile':None}, status=200)
 
 @ login_required
 def vote_submit_view(request, *args, **kwargs):

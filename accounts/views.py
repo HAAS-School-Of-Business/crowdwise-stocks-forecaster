@@ -69,7 +69,6 @@ def avatar(request):
 def profile(request):
     all_questions = Question.newmanager.all()
     if request.user.profile.questions_answered_count > 10:
-        print("here")
         request.user.profile.activate()
         request.user.save()
     return render(request,

@@ -11,6 +11,7 @@ app_name = 'question'
 
 urlpatterns = [
     path('', views.home_view, name='homepage'),
+    path('roadmap/', views.road_view, name='roadmap'),
     path('admin/', admin.site.urls),
     path('<slug:question>/', views.vote_single, name='vote_single')
 
