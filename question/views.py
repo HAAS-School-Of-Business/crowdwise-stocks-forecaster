@@ -2,7 +2,7 @@ from pstats import Stats
 import re
 from secrets import choice
 from unittest import result
-from django.http import Http404, HttpResponse, JsonResponse, HttpResponseRedirect
+from django.http import Http404, HttpRequest, HttpResponse, JsonResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.conf import settings
@@ -22,9 +22,7 @@ ALLOWED_HOSTS = settings.ALLOWED_HOSTS
 import os
 import json
 
-def road_view(request, *args, **kwargs):
-    print("here")
-    return render(request, 'pages/about.html', {'request': request}, status=200)
+
 
 
 def home_view(request, *args, **kwargs):
