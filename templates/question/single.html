@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
-
 {%load static%}
+
 {%if user not in question.voters.all and question.result == None and question.is_live%}
 <body>
   <div class="wf-section border:1px">
@@ -43,6 +43,7 @@
       {% else%} 
       <p class="paragraph-21">Thanks for submitting your prediction! You voted No. </p>
       {% endif %}
+      {% if request.user.profile.active %}
       <div class="columns-8 w-row">
         <div class="column-21 w-col w-col-6">
           <div class="div-block-14">
@@ -70,9 +71,17 @@
           </div>
         </div>
       </div>
+      {%else%}
+      <div class="div-block-15">
+        <p class="paragraph-21">
+        You must answer 10 questions before account activation. <br>Once you are successfully activated, you will gain access to CPA's data.<br>
+        You have answered {{request.user.profile.questions_answered_count}} out of 10 questions.
+        </p>
+      </div>
       <div class="div-block-15">
         <a href="{% url "accounts:profile" %}" class="link-2">Return To Dashboard</a>
       </div>
+      {%endif%}
     </div>
   </div>
 </body>
