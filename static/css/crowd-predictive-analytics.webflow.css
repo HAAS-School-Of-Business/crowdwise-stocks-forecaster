@@ -1654,6 +1654,15 @@
   text-align: center;
 }
 
+.heading-440 {
+  font-family: Inconsolata, monospace;
+  color: #b33a3a;
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 400;
+  text-align: center;
+}
+
 .heading-45 {
   margin-top: 0px;
   margin-bottom: 0px;
@@ -2423,6 +2432,16 @@
     padding-right: 20px;
     padding-left: 20px;
     text-align: left;
+  }
+
+  .heading-144{
+    font-family: Inconsolata, monospace;
+    color: #c42e2e;
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 400;
+    text-align: center;
+
   }
 
   .footer-flex-container {

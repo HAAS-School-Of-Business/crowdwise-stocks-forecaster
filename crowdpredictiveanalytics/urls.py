@@ -11,6 +11,7 @@ from django.conf.urls.static import static
 import question
 from question.views import (home_view, question_list_view, vote_submit_view)
 
+admin.site.site_header="Crowd Predictive Analytics Admin"
 
 handler404 = 'crowdpredictiveanalytics.views.custom_page_not_found_view'
 handler500 = 'crowdpredictiveanalytics.views.custom_error_view'
