@@ -108,6 +108,7 @@ class Question(models.Model):
         self.equal_w_score_no = no
         self.equal_w_score_yes = self.equal_w_score_yes*100
         self.equal_w_score_no = self.equal_w_score_no*100
+        self.save()
 
         denom_yes = []
         numerator_yes = []
@@ -135,6 +136,7 @@ class Question(models.Model):
             return
         except:
             print('Error in Updating The Scores')
+            self.save()
             return
 
 
