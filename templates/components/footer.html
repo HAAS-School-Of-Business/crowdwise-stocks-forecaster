@@ -1,53 +1,29 @@
 {%load static%}
-<head>
-    <link href="{% static 'images/favicon.ico'%}" rel="shortcut icon" type="image/x-icon">
-    <link href="{% static 'images/webclip.png'%}" rel="apple-touch-icon">         
-</head>
-
-<style>
-
-    .para-2{
-        font-size: xx-small;
-    }
-    @media (max-width: 1000px) { 
-      .mb-2 {
-        width: 75px;
-        height: 23;
-      }
-  }
-</style>
-<div class="container">
-    <footer class="pt-4 my-md-5 pt-md-5 border-top">
-
-        <div class="row">
-
-            <div class="col-12 col-md">
-                <a>
-                <img class="mb-2" src="{% static 'images/cpalogo.jpg'%}"alt="" width="224"
-                    height="69"></a>
-                <small class="d-block mb-3 text-muted">&copy; 2022</small>
-            </div>
-            <div class="col-6 col-md">
-                <h5>Categories</h5>
-                <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="#">Coming Soon</a></li>
-                </ul>
-            </div>
-            <div class="col-6 col-md">
-                <h5>Resources</h5>
-                <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="#">Coming Soon</a></li>
-                </ul>
-            </div>
-            <div class="col-6 col-md">
-                <h5>About</h5>
-                <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="#">Coming Soon</a></li>
-                </ul>
-            </div>
+<footer id="footer" class="footer wf-section">
+    <div class="w-container">
+      <div class="footer-flex-container">
+        <a href="#" class="footer-logo-link"><img src="{%static 'images/bluelogo.png'%}" sizes="100px"  alt="" class="footer-image"></a>
+        <div>
+          <h2 class="footer-heading">CATEGORIES</h2>
+          <ul role="list" class="w-list-unstyled">
+            <li>
+              <a href="#" class="footer-link">Coming Soon</a>
+            </li>
+          </ul>
         </div>
         <div>
-            <p class="para-2">Disclaimer. Past performance is not indicative of future results. Neither University of California nor anyone involved with this website guarantees any specific outcome or profit. You should be aware of the real risk of loss in following any strategy or investment discussed on this website or via any channel related to it. Strategies or investments discussed may fluctuate in price or value. Investors may get back less than invested. Investments or strategies mentioned on this website or via any channel related to it may not be suitable for you. This material does not take into account your particular investment objectives, financial situation or needs and is not intended as recommendations appropriate for you. You must make an independent decision regarding investments or strategies mentioned on this website or via any channel related to it. Before acting on information on this website or via any channel related to it, you should consider whether it is suitable for your particular circumstances and strongly consider seeking advice from your own financial or investment adviser.<br><br><br></p>
+          <h2 class="footer-heading">DOCUMENTS</h2>
+          <ul role="list" class="w-list-unstyled">
+            <li>
+              <a href="#" class="footer-link">Terms and Conditions</a>
+            </li>
+            <li>
+              <a href="#" class="footer-link">Privacy </a>
+            </li>
+          </ul>
         </div>
-    </footer>
-    <div>
+      </div>
+      <p class="paragraph-20">Disclaimer. Past performance is not indicative of future results. Neither University of California nor anyone involved with this website guarantees any specific outcome or profit. You should be aware of the real risk of loss in following any strategy or investment discussed on this website or via any channel related to it. Strategies or investments discussed may fluctuate in price or value. Investors may get back less than invested. Investments or strategies mentioned on this website or via any channel related to it may not be suitable for you. This material does not take into account your particular investment objectives, financial situation or needs and is not intended as recommendations appropriate for you. You must make an independent decision regarding investments or strategies mentioned on this website or via any channel related to it. Before acting on information on this website or via any channel related to it, you should consider whether it is suitable for your particular circumstances and strongly consider seeking advice from your own financial or investment adviser.</p>
+      <div class="text-block-3">Copyright © 2022 Crowd Predictive Analytics. All rights reserved.</div>
+    </div>
+  </footer>

@@ -58,6 +58,10 @@ class Profile(models.Model):
         else:
             return 0
 
+    @property
+    def tokens(self):  
+          return self.correct_answers*2
+
 
     def clean(self):
         if not self.avatar:

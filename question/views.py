@@ -81,6 +81,9 @@ def vote_single(request, question):
     voted = False
     response = None
     q = Question.objects.get(slug=question)
+    voters=[voter for voter in q.voters.all()]
+    if request.user in voters:
+        voted=True
     superuser = request.user.is_superuser
     if request.method == "GET" and superuser :
         form_q = QuestionForm()
@@ -98,12 +101,10 @@ def vote_single(request, question):
         return redirect('/')
     elif request.method == "POST" and not superuser and not voted:
         form = ChoiceForm()
-        print("why are here ")
         if request.POST.get('Yes') and not voted:
             response=True
             q.addYesVote()
         elif request.POST.get('No') and not voted:
-
             response=False
             q.addNoVote()
         join_q(request, question, response)
@@ -117,23 +118,11 @@ def vote_single(request, question):
         return HttpResponseRedirect('/' + q.slug +'?voted=True' )
     else:
         form = ChoiceForm()
-        if 'voted' in request.GET:
-            voted = True
-            try:
-                choices = request.user.profile.choices.queryset.all()
-                for c in choices:
-                    if c.user == request.user:
-                        print("answwer")
-                        print(c.answer)
-                        if c.answer:
-                            response=True
-                        else:
-                            response=False
-
-                    else:
-                        response=None
-            except:
-                print("User's answer didnt register")
-                response = False
+        try:
+            choice = request.user.profile.choices.filter(question=q)
+            response = choice[0].answer
+        except:
+            print("User's answer didnt register")
+            response = False
     return render(request, 'question/single.html', {'question': q, 'form':form, 'superuser': superuser,'voted': voted, 'user': request.user, 'answer': response, "active": request.user.profile.active})
 

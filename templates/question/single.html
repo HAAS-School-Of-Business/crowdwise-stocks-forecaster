@@ -1,231 +1,83 @@
 {% extends 'base.html' %}
-
-
 {% block content %}
-  <center>
-    {% if voted %}
-    <div class="card text-center">
-      <div class="card-header">
-        Your Vote Was Sucessfully Submitted 
-      </div>
-      <div class="card-body">
-        <h5 class="card-title">{{question.question}}</h5>
-        <div class="d-flex justify-content-between align-items-center mt-4 px-4">
-          <div class="stats">
-              {%if active%}
 
-            <h9 class="mb-0">Crowd's Equal Weighted Vote</h9><br> <span>{{question.getScores.5}} Total Votes <br></span><span>{{question.getScores.1}} % Yes</span>
-            <br> <span>{{question.getScores.2}} % No</span>
-          </div>
-          <div class="stats">
-            <h9 class="mb-0">Crowd's Accuracy Weighted Vote</h9><br> <span>{% if question.getScores.3 != 'None' %} {{question.getScores.4}} % Yes<br> <span>{{question.getScores.4}} % No</span>{%else%} No Weights Yet {%endif%}</span>
-            {%endif%}
-
+{%load static%}
+{%if user not in question.voters.all and question.result == None and question.is_live%}
+<body>
+  <div class="wf-section border:1px">
+    <div class="container-8 w-container">
+      <h1 class="heading-35">{{question.question}} </h1>
+      <h4 class="heading-36">Voting Ends: {{question.dateEnds}} </h4>
+      <p class="paragraph-21">Warning: You may not edit your response once it has been submitted. </p>
+      <div class="w-row">
+        <form action="" method=POST>
+        <div class="w-col w-col-6">
+          <div class="div-block-14">
+            <input class="w-button button-8" type='submit' value='Yes' name='Yes' />
           </div>
         </div>
-
-        <a href="{% url "accounts:profile"%}" class="btn btn-primary">Dashboard</a>
-      </div>
-      {% if answer %}
-      <div class="card-footer text-muted">
-       Your Vote =  Yes     
-      </div>
-       {%elif not answer  %}
-       <div class="card-footer text-muted">
-       Your Vote = No
-       </div>
-       {%endif%}
-    </div>
-    {% elif user not in question.voters.all and question.result == None and question.is_live %}
-    <form action="" method=POST>
-      <div class="card text-center">
-          <div class="card-header">
-            Voting Ends {{question.dateEnds}}
+        <div class="w-col w-col-6">
+          <div>
+            <input class="w-button button-8" type='submit' value='No' name='No' />
           </div>
-          <div class="card-body">
-            <h5 class="card-title">{{question.question}}</h5>
-                <div class="d-flex justify-content-between align-items-center mt-4 px-4">
-
-                <div class="column-6 w-col w-col-6">
-                  <input class="w-button" type='submit' value='Yes' name='Yes' />
-                </div>
-              <div class="column-7 w-col w-col-6">
-                <input class="w-button" type='submit' value='No' name='No' />
-              </div>
-                    </div>
-                    <a href="{% url "accounts:profile"%}" class="btn btn-primary">Dashboard</a>
-                  </div>
-              </div>
         </div>
-      </section>
-    </form>
-    {% else %}
-    <form action="" method=GET>
-    <div class="card text-center">
-      {% if question.is_live %} 
-      <div class="card-header">
-        Voting Still Live
       </div>
-      {% elif not question.is_live %}
-      <div class="card-header">
-        Voting Ended - Results will be posted soon
-      </div>
-      {%else %}
-      <div class="card-header">
-        Vote Completed with Result : {% if question.result%} Yes {%else%} No {%endif%}
-      </div>
-      {%endif%}
-      <div class="card-body">
-        <h5 class="card-title">{{question.question}}</h5>
-        <div class="d-flex justify-content-between align-items-center mt-4 px-4">
-          <div class="stats">
-            {% if active%}
-            <h9 class="mb-0">Crowd's Equal Weighted Vote</h9><br> <span>{{question.getScores.5}} Total Votes <br></span><span>{{question.getScores.1}} % Yes</span>
-            <br> <span>{{question.getScores.2}} % No</span>
-
-          </div>
-          <div class="stats">
-           
-            <h9 class="mb-0">Crowd's Accuracy Weighted Vote</h9><br> <span>{% if question.getScores.3 != 'None' %} {{question.getScores.3}} % Yes<br> <span>{{question.getScores.4}} % No</span>{%else%} No Weights Yet {%endif%}</span>
-            {%endif%}
-
-          </div>
-
-        </div>
-
-        <a href="{% url "accounts:profile"%}" class="btn btn-primary">Dashboard</a>
+      <div class="div-block-15" >
+        <a href="{% url "accounts:profile"%}" class="link">Not ready to vote? Return To Dashboard</a>
       </div>
     </div>
-
-    </form>
-    {% endif %}
-
-
-    
-  </center>
-  <style>
-    .card {
-      width: 50%;
-    }
-    .stats span {
-        font-size: 22px
-    }
-    .stats{
-      padding-left: 25px;
-    }
-    </style>
-
-{%endblock content %}
-
-<!-- {%block head_title %} Crowd Predictive Analytics {%endblock head_title %}
-
-
-<div class='row text-center'>
-  <div class="col">
-      <h1>{{question.question}}</h1>
-      <div><small class="text-muted">Voting Ends {{question.dateEnds}}</small></div>
-      <h4><input type="checkbox" id="yes" name="yes" value="Yes">
-      <label for="yes"> Yes</label>
-      <input type="checkbox" id="no" name="no" value="no">
-      <label for="no"> No</label></h4><br>
-      <div class = 'col-md-4 mx-auto col-10'>
-        <form class ='form' method='POST' action='/{{question.slug}}/'> 
-          {% csrf_token %}
-          <input type='hidden' value='/' name='next' />
-           <button type='submit' class = 'btn btn-primary'> Vote Yes</button> 
-           <button type='submit' class = 'btn btn-primary'> Vote Yes</button> 
-          </form> 
-        </div>
   </div>
-</div>
+</body>
+{%else%}
+<body>
+  <div class="wf-section border:1px">
+    <div class="w-container">
+      <h1 class="heading-35">{{question.question}} </h1>
+      <div class="div-block-11">
+      <img src="{%static 'images/cubes.gif'%}" loading="lazy" width="150" height="150" alt="" class="align-items-center">
+      </div>
+      <h4 class="heading-36">Voting Ends: {{question.dateEnds}} </h4>
+      <h5 class="heading-38">{{question.getScores.5}} Total Votes Submitted.</h5>
+      {%if answer%} 
+      <p class="paragraph-21">Thanks for submitting your prediction! You voted Yes. </p>
+      {% else%} 
+      <p class="paragraph-21">Thanks for submitting your prediction! You voted No. </p>
+      {% endif %}
+      <div class="columns-8 w-row">
+        <div class="column-21 w-col w-col-6">
+          <div class="div-block-14">
+            <h3 class="heading-37">Equal Weighted Percentages</h3>
+            <p class="paragraph-22">Yes - {{question.getScores.1}}%</p>
+            <div class="html-embed-3 w-embed"><progress height="40px" value="{{question.getScores.1}}" max="100"></progress></div>
+            <p class="paragraph-22">No - {{question.getScores.2}}%</p>
+            <div class="html-embed-3 w-embed"><progress height="40px" value="{{question.getScores.2}}" max="100"></progress></div>
+          </div>
+        </div>
+        <div class="w-col w-col-6">
+          <div class="div-block-14">
+            <h3 class="heading-37">Accuracy Adjusted Percentages</h3>
+            {% if question.getScores.3 != 'None' %}  
+            <p class="paragraph-22">Yes - {{question.getScores.3}}%</p>
+            <div class="html-embed-3 w-embed"><progress height="40px" value="{{question.getScores.3}}" max="100"></progress></div>
+            <p class="paragraph-22">No - {{question.getScores.4}}%</p>
+            <div class="html-embed-3 w-embed"><progress height="40px" value="{{question.getScores.4}}" max="100"></progress></div>
+            {%else%}
+            <p class="paragraph-22">Yes - TDB</p>
+            <div class="html-embed-3 w-embed"><progress height="40px" value="100" max="100"></progress></div>
+            <p class="paragraph-22">No - TBD</p>
+            <div class="html-embed-3 w-embed"><progress height="40px" value="100" max="100"></progress></div>
+            {%endif%}
+          </div>
+        </div>
+      </div>
+      <div class="div-block-15">
+        <a href="{% url "accounts:profile" %}" class="link-2">Return To Dashboard</a>
+      </div>
+    </div>
+  </div>
+</body>
 
 
-<script>
+{% endif %}
 
-function handleFormSubmit(event){
-  event.preventDefault()
-  const myForm = event.target
-  const myFormData = new FormData(myForm)
-  const endpoint = myForm.getAttribute("action")
-  const method = myForm.getAttribute("method")
-  const xhr = new XMLHttpRequest()
-  xhr.open(method,url)
-  xhr.setRequestHeader("HTTP_X_REQUESTED_WITH", "XMLHttpRequest")
-  xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest")
-  xhr.onload=function(){
-      const serverResponse = xhr.response
-      console.log(serverResponse)
-  }
-  xhr.send(myFormData)
-
-}
-const questionEl = document.getElementById('questions')
-
-const questionCrEl  = document.getElementById('question-create-form')
-
-questionCrEl.addEventListener("submit",handleFormSubmit )
-
-function loadQuestions(questionElement) {
-  const xhr = new XMLHttpRequest()
-  const method = 'GET'
-  const url = '/questions/'
-  const responseType='json'
-  xhr.responseType = responseType
-  xhr.open(method, url)
-  xhr.onload = function() {
-  const serverResponse = xhr.response
-  var listedItems=serverResponse.response
-  var finalQuestionStr = ''
-  for (var i=0; i< listedItems.length; i++){
-      console.log(i)
-      console.log(listedItems[i])
-      var questionObj = listedItems[i]
-      var currentItem = formatQuestionElement(questionObj)
-      finalQuestionStr += currentItem
-  }
-  questionElement.innerHTML  = finalQuestionStr
-  console.log(listedItems)
-}
-xhr.send()
-
-}
-
-loadQuestions(questionEl)
-
-// questionElement.innerHTML = 'Loading.....'
-
-
-
-function submitNoVote(question_id, currentCount) {
-  console.log(question_id, currentCount)
-
-}
-
-function submitYesVote(question_id, currentCount) {
-
-
-}
-
-function voteYes(question) {
-  return "<button class='btn btn-primary'onclick=submitYesVote("+question.id+", "+question.yesVotes+")> Yes </button>"
-}
-function voteNo(question){
-  return "<button class='btn btn-primary' onclick=submitNoVote("+question.id+", "+question.noVotes+")> No </button>"
-}
-
-function submit() {
-  return "<div class = 'col-md-4 mx-auto col-10'><form class ='form' method='POST' action='/submit-vote'> <input type='hidden' value='/' name='next' /> <button type='submit' class = 'btn btn-primary'> Submit</button> </form> </div>"
-}
-
-function formatQuestionElement(q) {
-  var formattedQuestion = "<div class='col-12 col-md-10  border-top border-bottom py-3 mb-4 question' id='question-" + q.id + "'><p>" + q.question + "<\p><div class='btn-group'>"+
-  voteYes(q)+ "   " +voteNo(q)+ submit()+
-  "</div>"
-  return formattedQuestion
-}
-
-
-</script>
-
-
- -->
+{%endblock%}

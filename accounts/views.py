@@ -73,6 +73,7 @@ def profile(request):
         request.user.save()
     try:
         choices = request.user.profile.choices.all()
+
         return render(request,
             'accounts/profile.html',
             {'questions': all_questions, "active": request.user.profile.active, "profile": request.user.profile, "choices":choices}, status=200)
@@ -147,9 +148,6 @@ def accounts_register(request):
 
 def activate(request, user):
     try:
-        user.is_active = True
-        user.save()
-        login(request, user)
-        return redirect('login')
+        return redirect('profile')
     except:
         return redirect('login')

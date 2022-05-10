@@ -22,6 +22,7 @@ def join_q(request, question, resp):
     request.user.profile.questions_answered_count = request.user.profile.questions_answered_count +1
     request.user.profile.save()
     q.voters.add(request.user)
+    q.update_scores()
     q.save()
     return
 
@@ -79,9 +80,7 @@ class Question(models.Model):
         return reverse('question:vote_single', args=[self.slug])
 
     def getScores(self):
-        self.update_scores()
-        self.save()
-        totalVotes = self.yesVotes + self.noVotes
+        totalVotes=self.yesVotes+self.noVotes
         return {1:str(self.equal_w_score_yes), 2: str(self.equal_w_score_no), 3: str(self.avg_w_score_yes), 4:str(self.avg_w_score_no), 5: str(totalVotes)}
 
     @property

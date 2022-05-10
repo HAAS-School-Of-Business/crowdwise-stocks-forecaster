@@ -1,115 +1,38 @@
+{%load static%}
 
-<!-- Font Awesome -->
-<head>
-  {%load static %}
-  <link href="{% static 'images/favicon.ico'%}" rel="shortcut icon" type="image/x-icon">
-  <link href="{% static 'images/webclip.png'%}" rel="apple-touch-icon">
-<link
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-  rel="stylesheet"
-/>
-<!-- Google Fonts -->
-<link
-  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-  rel="stylesheet"
-/>
-<!-- MDB -->
-<link
-  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.css"
-  rel="stylesheet"
-/>
-<style>
-  @media (max-width: 1000px) { 
-    .mb-2 {
-      width: 75px;
-      height: 23;
-    }
-    .navbar{
-      padding-bottom: 100px;
-    }
-}
-</style>
 
-<!-- Navbar-->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid justify-content-between">
-    <!-- Left elements -->
-      <!-- Brand -->
-      <div class="container border-bottom padding-bottom:50px">
-        <a href = '/'>
-        <img class="mb-2" src="{% static 'images/cpalogo.jpg'%}"alt="" width="150"
-            height="46">
-        </a>
-    <div class="col-md-3 nav-link">
-        <h7 ><a class="text-dark" href="/">Crowd Predictive Analytics</a></h7>
-    </div>
-
-    <!-- Right elements -->
-    <ul class="navbar-nav flex-row">
-    {% if request.user.is_authenticated %}
-        <script
-        type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.js"
-        ></script>
-      <li class="nav-item me-3 me-lg-1">
-        <a class="nav-link d-sm-flex align-items-sm-center" href="{% url "accounts:profile" %}">
-            <i class="fas fa-user-alt"></i>
-          <strong class="d-none d-sm-block ms-1">@{{request.user.username}}</strong>
-        </a>
+<header id="nav" class="sticky-nav-2">
+  <nav class="w-container">
+    <ul role="list" class="nav-grid w-list-unstyled">
+      <li id="w-node-_4a0960b7-b1e6-43eb-4ee7-59f753da9e4d-2723d003">
+        <a href="#top" class="nav-logo-link"><img src="{%static 'images/bluelogo.png'%}" sizes="(max-width: 479px) 50vw, (max-width: 767px) 78.5078125px, (max-width: 991px) 79.0078125px, 185.0078125px"  alt="" class="nav-logo-2"></a>
       </li>
-      <li class="nav-item dropdown me-3 me-lg-1">
-
-        <ul
-          class="dropdown-menu dropdown-menu-end"
-          aria-labelledby="navbarDropdownMenuLink"
-        >
-        <li>
-            <a class="dropdown-item" href="#">Unanswered Questions</a>
-          </li>
-          <li>
-            <a class="dropdown-item" href="#">Question Results</a>
-          </li>
-        </ul>
+      <li id="w-node-_066ba4de-6669-a13e-5606-de8d187351b1-2723d003">
+        <a href="#learnmore" class="nav-link">HOW IT WORKS</a>
       </li>
-      <li class="nav-item dropdown me-3 me-lg-1">
-        <a
-          class="nav-link dropdown-toggle hidden-arrow"
-          href="#"
-          id="navbarDropdownMenuLink"
-          role="button"
-          data-mdb-toggle="dropdown"
-          aria-expanded="false"
-        >
-          <i class="fas fa-chevron-circle-down fa-lg"></i>
-        </a>
-        <ul
-          class="dropdown-menu dropdown-menu-end"
-          aria-labelledby="navbarDropdownMenuLink"
-        >
-        <li>
-        <a class="dropdown-item" href="{% url "accounts:profile" %}">Dashboard</a>
-        </li>
-        <li>
-        <a class="dropdown-item" href="{% url "accounts:edit" %}">Edit Profile</a>
-        </li>
-        <li>
-        <a class="dropdown-item" href="{% url "password_change" %}">Change Password</a>
-        </li>
-        <li>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="{% url "logout" %}">Logout</a>
-        </div>
-    </li>
-        </ul>
+      <li>
+        <a href="#cards-section-early" class="nav-link">EARLY REGISTRATION PERKS</a>
+      </li>
+      <li>
+        {% if request.user.is_authenticated %}
+        <a href="{% url "logout" %}" class="nav-link">SIGN OUT</a>
+
+        {%else%}
+        <a href="{% url "login" %}" class="nav-link">SIGN IN</a>
+
+        {%endif%}
+
+      </li>
+      
+      <li id="w-node-_4a0960b7-b1e6-43eb-4ee7-59f753da9e56-2723d003">
+        {% if request.user.is_authenticated %}
+
+        <a class="w-button" href="{% url "accounts:profile" %}">Dashboard</a>
+        {%else%}
+        <a href="{% url "accounts:register" %}" class="w-button">Register</a>
+        {%endif%}
       </li>
     </ul>
-    <!-- Right elements -->
-    {% else %}
-    <nav>
-        <a class="p-2 text-dark" href="{% url "accounts:register" %}">Register</a>
-        <a class="p-2 text-dark" href="{% url "login" %}">Login</a>
-    </nav>
-    {% endif %}
+  </nav>
+</header>
 
-  </div>
-</nav>
