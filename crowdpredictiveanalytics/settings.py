@@ -23,7 +23,7 @@ DEBUG=False
 # ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost, crowdpredictiveanalytics.com").split(",")
 SECRET_KEY= 'y2j!+h!gm$e$2l+t=6onxpie)!ppr866f^6g7wrq+k@^^ntt_c'
 ALLOWED_HOSTS=['crowdpredictiveanalytics.com/','crowdpredictiveanalytics.com',"www.crowdpredictiveanalytics.com/","www.crowdpredictiveanalytics.com", "*","www.my-app-pl8tf.ondigitalocean.app/", "my-app-pl8tf.ondigitalocean.app/"]
-DJANGO_ALLOWED_HOSTS = ['crowdpredictiveanalytics.com/','crowdpredictiveanalytics.com',"www.crowdpredictiveanalytics.com/","www.crowdpredictiveanalytics.com", "*","www.my-app-pl8tf.ondigitalocean.app/", "my-app-pl8tf.ondigitalocean.app/"]
+DJANGO_ALLOWED_HOSTS = ['http://crowdpredictiveanalytics.com', 'https://crowdpredictiveanalytics.com', 'crowdpredictiveanalytics.com/','crowdpredictiveanalytics.com',"www.crowdpredictiveanalytics.com/","www.crowdpredictiveanalytics.com", "*","www.my-app-pl8tf.ondigitalocean.app/", "my-app-pl8tf.ondigitalocean.app/"]
 # ALLOWED_HOSTS = ['*']
 
 AUTHENTICATION_BACKENDS = ('crowdpredictiveanalytics.backends.CaseInsensitiveModelBackend', )
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'question',
+    'crowdpredictiveanalytics',
     'storages'
 ]
 
