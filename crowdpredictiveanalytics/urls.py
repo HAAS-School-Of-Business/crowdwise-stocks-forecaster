@@ -2,13 +2,16 @@
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.0/topics/http/urls/
 """
+from typing import Protocol
 from django.contrib import admin
 from django.urls import path, include
 from question import views as q_views
 from accounts import views as a_views
 from django.conf import settings
 from django.conf.urls.static import static
-import question
+from question.models import Question
+from django.contrib.sitemaps import GenericSitemap # new
+from django.contrib.sitemaps.views import sitemap # new
 from question.views import (home_view, question_list_view, vote_submit_view)
 
 admin.site.site_header="Crowd Predictive Analytics Admin"
@@ -18,6 +21,12 @@ handler500 = 'crowdpredictiveanalytics.views.custom_error_view'
 # handler403 = 'crowdpredictiveanalytics.views.custom_page_not_found_view'
 # handler400 = 'crowdpredictiveanalytics.views.custom_page_not_found_view'
 
+from .sitemaps import StaticViewSitemap
+from . import views
+
+sitemaps = {
+    'static': StaticViewSitemap,
+}
 
 urlpatterns = [
     path('', include('question.urls', namespace='question')),
@@ -27,7 +36,8 @@ urlpatterns = [
     path('questions/', q_views.question_list_view),
     path('questions/<int:question_id>', q_views.vote_single),
     path('profile/', a_views.profile, name='profile'),
-
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
+         name='django.contrib.sitemaps.views.sitemap'),
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls', namespace='accounts')),
     path('accounts/', include('django.contrib.auth.urls')),
