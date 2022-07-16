@@ -89,25 +89,25 @@ WSGI_APPLICATION = 'crowdpredictiveanalytics.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': str(BASE_DIR / 'db.sqlite3'),
-    # }
-        'default': {
-
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-
-        'NAME': 'defaultdb',
-
-        'USER': 'doadmin',
-
-        'PASSWORD': 'AVNS_juKVz3A99MO0n53',
-
-        'HOST': 'db-crowdpredictiveanalytics-do-user-11397652-0.b.db.ondigitalocean.com',
-
-        'PORT': '25060',
-
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': str(BASE_DIR / 'db.sqlite3'),
     }
+    #     'default': {
+
+    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+
+    #     'NAME': 'defaultdb',
+
+    #     'USER': 'doadmin',
+
+    #     'PASSWORD': 'AVNS_juKVz3A99MO0n53',
+
+    #     'HOST': 'db-crowdpredictiveanalytics-do-user-11397652-0.b.db.ondigitalocean.com',
+
+    #     'PORT': '25060',
+
+    # }
 }
 
 POSTGRES_DB = os.environ.get("POSTGRES_DB")
@@ -184,7 +184,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static/'),
 )
-
 
 
 STATIC_ROOT = BASE_DIR / "staticfiles-cdn" # in production, we want cdn

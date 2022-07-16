@@ -13,7 +13,6 @@ from question.models import Question
 from django.contrib.sitemaps import GenericSitemap # new
 from django.contrib.sitemaps.views import sitemap # new
 from question.views import (home_view, question_list_view, vote_submit_view)
-from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
@@ -45,7 +44,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls', namespace='accounts')),
     path('accounts/', include('django.contrib.auth.urls')),
-    url(r'^$', include('frontend.urls')),
 #     path('register/', user_views.register, name='register'),
 #     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
 #     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
