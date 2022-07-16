@@ -184,6 +184,11 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static/'),
 )
+STATICFILES_FINDERS = (
+'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+'django.contrib.staticfiles.finders.FileSystemFinder',
+)
+
 
 STATIC_ROOT = BASE_DIR / "staticfiles-cdn" # in production, we want cdn
 
